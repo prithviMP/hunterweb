@@ -1,0 +1,76 @@
+
+.dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    cursor: pointer;
+}
+
+
+.filter-section-sales {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 10px;
+}
+
+
+/* Select dropdown styling */
+.dropdown-select {
+    width: 100%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: transparent;
+    appearance: none;
+    /* Remove default dropdown arrow */
+    padding: 5px;
+    font-size: 16px;
+    font-weight: var(--extra-semi-bold);
+    font-family: var(--manrope);
+    color: var(--white-color);
+}
+
+.dropdown-select option {
+    color: var(--secondary-color);
+    font-size: 16px;
+    font-weight: var(--extra-semi-bold);
+    font-family: var(--manrope);
+}
+
+/* Optional hover effect for dropdown */
+.dropdown:hover {
+    background-color: #0056b3;
+    /* Slightly darker shade of blue */
+}
+
+.sales-monthly-graph {
+    background-color: var(--white-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-right: 15px;
+}
+
+.download-button {
+    height: 40px;
+    border: none;
+    background-color: #FFFFFF;
+    position: relative;
+    top: 5px;
+    right: 10px;
+    font-size: 16px;
+    font-weight: var(--extra-semi-bold);
+    font-family: var(--manrope);
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.monthlyGraphNoteText {
+    font-weight: var(--extra-semi-bold);
+    font-family: var(--manrope);
+    color: var(--secondary-color);
+    position: relative;
+    left: 30px;
+    bottom: 25px;
+    font-size: 13px;
+}

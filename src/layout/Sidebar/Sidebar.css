@@ -1,0 +1,66 @@
+/* Sidebar container */
+.sidebar {
+    min-height: 100%;
+    background-color: var(--main-background-color);
+    padding: 15px 10px;
+ 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+   
+}
+
+/* Menu item style */
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin: 6px 0;
+}
+
+.menu-item.selected {
+    background-color: #007bff;
+}
+
+/* Text style */
+.menu-item-text {
+    font-size: 14px;
+    color: var(--side-nav-menu-color);
+    font-family: var(--manrope);
+    margin-left: 10px;
+}
+
+/* Style for selected menu item text */
+.menu-item.selected .menu-item-text {
+    color: white;
+}
+
+/* Icon image style */
+.icon-image {
+    width: 18px;
+    height: 18px;
+
+}
+
+/* Default icon will be hidden when the item is selected */
+.menu-item.selected .default-icon {
+    display: none;
+}
+
+/* Hide white icons by default */
+.hide-on-default {
+    display: none;
+}
+
+/* Show white icon only when active */
+.menu-item.selected .active-icon {
+    display: block !important;
+}
+
+.commoncss {
+    display: flex;
+    align-items: center;
+}

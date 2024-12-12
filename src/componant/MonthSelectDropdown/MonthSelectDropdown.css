@@ -1,0 +1,46 @@
+.month-select-dropdown select {
+    width: 150px;
+    border: none;
+    border-radius: 5px;
+    font-family: var(--manrope);
+    font-weight: var(--extra-semi-bold);
+    letter-spacing: 0.5px;
+    font-size: 16px;
+    color: #909090;
+    margin-left: -15px;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.month-select-dropdown {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.month-select-dropdown .date_icon {
+    position: relative;
+    left: 15px;
+}
+
+/* Hides the default dropdown arrow */
+.month-select-dropdown select {
+    -webkit-appearance: none;
+    /* For Webkit browsers (Chrome, Safari, etc.) */
+    -moz-appearance: none;
+    /* For Firefox */
+    appearance: none;
+    /* For other modern browsers */
+    /* Border radius if you want rounded corners */
+}
+
+/* Optional: Add a custom background image if you want your own arrow icon */
+.month-select-dropdown {
+    position: relative;
+}
+
+.arrow_down_icon {
+    position: relative;
+    right: 25px;
+
+}

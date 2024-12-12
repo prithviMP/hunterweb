@@ -1,0 +1,225 @@
+.accordion-header {
+    background: var(--white-color);
+    padding: 18px 10px;
+    cursor: pointer;
+    border: 1.5px solid #E0E0E0;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-family: var(--montserrat);
+    color: var(--side-nav-menu-color);
+    font-size: 18px;
+    font-weight: var(--extra-semi-bold);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.accordion-content {
+    background: var(--white-color);
+    padding: 18px 10px;
+    cursor: pointer;
+    border: 1.5px solid #E0E0E0;
+    margin-bottom: 15px;
+    margin-top: -20px;
+    font-family: var(--montserrat);
+    color: var(--side-nav-menu-color);
+    font-size: 16px;
+    font-weight: var(--extra-semi-bold);
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    border-top: none !important;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Three columns */
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.full-row {
+    grid-column: span 3;
+    /* Span across all three columns */
+}
+
+.input-field,
+.select-field {
+    width: 95%;
+    /* Ensure fields fill their container */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: var(--input-field-background-color);
+    height: 25px;
+    /* Updated for better appearance */
+}
+
+.textarea-field {
+    width: 97.8%;
+    /* Full width for Address */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: var(--input-field-background-color);
+    height: 50px;
+    /* Enough space for text */
+
+}
+
+.content-grid label {
+    font-size: 14px;
+    margin-bottom: 0px;
+    font-weight: var(--semi-bold);
+    /* Ensure label visibility */
+}
+
+textarea:focus,
+.input-field:focus,
+.select-field:focus {
+    outline: none;
+    border: 1px solid var(--primary-color);
+    /* Highlight on focus */
+    background-color: #ffffff;
+    /* Clearer background on focus */
+}
+
+.select-field {
+    height: 43px;
+    width: 100%;
+}
+
+.content-grid .input-group {
+    gap: 5px;
+    /* Add spacing between labels and fields */
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+
+
+.custom-file-upload input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload:hover {
+    background-color: var(--green-color);
+}
+
+.file-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.file-input-wrapper input {
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+
+.custom-file-upload {
+    padding: 10px 16px;
+    background: var(--green-color);
+    border: 1px solid var(--table-border-color);
+    border-radius: 4px;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px !important;
+    width: 100px;
+    color: var(--white-color);
+    font-family: var(--montserrat);
+
+}
+
+
+
+.file-name {
+    color: #666;
+    font-size: 14px;
+    background: var(--input-field-background-color);
+    border: 1px solid var(--table-border-color);
+    border-radius: 4px;
+    padding: 9px 16px;
+    width: 80%;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-left: -10px;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-left: none !important;
+
+}
+
+.button-section {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+    padding: 10px 0;
+}
+
+.cancel-button {
+    padding: 8px 24px;
+    border: 1px solid var(--table-border-color);
+    background: white;
+    color: var(--primary-color);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: var(--montserrat);
+}
+
+.save-button {
+    padding: 8px 30px;
+    border: none;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: var(--montserrat);
+}
+
+.cancel-button:hover {
+    background: #ffebee;
+}
+
+.save-button:hover {
+    background: #218838;
+}
+
+.error {
+    border-color: #dc3545 !important;
+}
+
+.error-message {
+    display: block;
+    color: red;
+    font-size: 12px;
+    font-family: var(--montserrat);
+    letter-spacing: 0.2px;
+    font-weight: 400;
+}
+
+.required-indicator {
+    color: red;
+    margin-left: 4px;
+}

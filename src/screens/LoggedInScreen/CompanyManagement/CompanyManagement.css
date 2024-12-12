@@ -1,0 +1,38 @@
+.company-management-main-section {
+    padding: 10px 0;
+}
+
+.company-info-section {
+    flex: 4;
+}
+
+.company-management-buttons {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.company-management-button {
+    background-color: var(--primary-color);
+    height: 40px;
+    width: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.dropdown {
+    padding: 8px;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+  
+    height: 40px;
+    color: var(--primary-color);
+    font-family: var(--manrope);
+    font-size: 14px;
+    font-weight: var(--extra-semi-bold);
+    margin-right: 10px;
+}
+
