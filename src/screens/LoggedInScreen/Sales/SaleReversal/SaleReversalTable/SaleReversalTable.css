@@ -1,0 +1,19 @@
+.sale-reversal-table {
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    width: 100%;
+    overflow-x: hidden;
+    /* Prevent double scrollbars */
+}
+
+.sale-reversal-table table {
+    width: 100%;
+  
+}
+
+.sale-reversal-table > div {
+    width: 100%;
+}
+
+

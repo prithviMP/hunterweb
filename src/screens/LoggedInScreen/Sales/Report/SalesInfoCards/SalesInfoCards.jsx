@@ -1,7 +1,7 @@
 import React from "react";
 import "./SalesInfoCards.css"; // Import CSS styles
 
-const SalesInfoCards = () => {
+const SalesInfoCards = ({ searchQuery }) => {
   const cardDetails = [
     {
       title: "Sales",
@@ -33,9 +33,15 @@ const SalesInfoCards = () => {
     },
   ];
 
+  const filteredCards = cardDetails.filter((card) =>
+    card.title.toLowerCase().includes(searchQuery?.toLowerCase() || '') ||
+    card.value.toLowerCase().includes(searchQuery?.toLowerCase() || '') ||
+    card.percentage.toLowerCase().includes(searchQuery?.toLowerCase() || '')
+  );
+
   return (
     <div className="details-on-small-card-container mt-15 ">
-      {cardDetails.map((card, index) => (
+      {filteredCards.map((card, index) => (
         <div key={index} className="card box-shadow">
           <div className="card-header">
             <span className="card-title">{card.title}</span>

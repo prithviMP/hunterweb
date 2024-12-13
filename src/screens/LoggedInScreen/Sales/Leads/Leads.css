@@ -65,18 +65,19 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 14px;
-    color: #D0D0D0;
+    color: #000000d2;
     font-family: var(--manrope);
 }
-.leads-create-form-group input{
-    width: 93%;
+
+.leads-create-form-group input {
+    width: 92%;
 }
 
 .leads-create-phone-input {
     display: flex;
     align-items: center;
-    gap: 10px;
-    
+    gap: 5px;
+
 }
 
 .leads-create-phone-input span {
@@ -86,8 +87,9 @@
 }
 
 .leads-create-form-group textarea {
-    min-height: 100px;
+    min-height: 80px;
     resize: vertical;
+    width: 97.5%;
 }
 
 .leads-create-submit-btn {
@@ -101,6 +103,3 @@
     margin-top: 20px;
 }
 
-.leads-create-submit-btn:hover {
-    background: #0056b3;
-}

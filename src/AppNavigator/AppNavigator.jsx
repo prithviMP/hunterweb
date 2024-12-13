@@ -9,19 +9,27 @@ import InvoiceManagement from "../screens/LoggedInScreen/InvoiceManagement/Invoi
 import Pricelist from "../screens/LoggedInScreen/Pricelist/Pricelist";
 import CompanyManagement from "../screens/LoggedInScreen/CompanyManagement/CompanyManagement";
 
-function AppNavigator() {
+function AppNavigator({ searchQuery }) {
     return (
         <Routes>
-            {/* Default route redirects to /dashboard */}
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
-            <Route path="/dashboard" element={<div><Dashboard /></div>} />
-            <Route path="/sales" element={<div><Sales /></div>} />
-            <Route path="/call-manager" element={<div><CallManager /></div>} />
-            <Route path="/performance-metrics" element={<div><PerformanceMetrics /></div>} />
-            <Route path="/targets" element={<div><Targets /></div>} />
-            <Route path="/invoice-management" element={<div><InvoiceManagement /></div>} />
-            <Route path="/pricelist" element={<div><Pricelist /></div>} />
-            <Route path="/company-management" element={<div><CompanyManagement /></div>} />
+            <Route path="/dashboard" element={<Dashboard searchQuery={searchQuery} />} />
+            <Route path="/sales" element={<Sales searchQuery={searchQuery} />} />
+            <Route path="/call-manager" element={<CallManager searchQuery={searchQuery} />} />
+            <Route
+                path="/performance-metrics"
+                element={<PerformanceMetrics searchQuery={searchQuery} />}
+            />
+            <Route path="/targets" element={<Targets searchQuery={searchQuery} />} />
+            <Route
+                path="/invoice-management"
+                element={<InvoiceManagement searchQuery={searchQuery} />}
+            />
+            <Route path="/pricelist" element={<Pricelist searchQuery={searchQuery} />} />
+            <Route
+                path="/company-management"
+                element={<CompanyManagement searchQuery={searchQuery} />}
+            />
         </Routes>
     );
 }

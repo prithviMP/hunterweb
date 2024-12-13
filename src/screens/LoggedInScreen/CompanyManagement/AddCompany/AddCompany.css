@@ -223,3 +223,63 @@ label {
     color: red;
     margin-left: 4px;
 }
+
+.add-company-select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.add-company-search-input {
+    width: 91%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    background-color: var(--input-field-background-color);
+    margin-left: 6px;
+    margin-top: 10px;
+}
+
+.add-company-dropdown-list {
+    position: absolute;
+    width: 98.5%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: var(--input-field-background-color);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow-x: hidden;
+}
+
+.add-company-dropdown-item {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.add-company-dropdown-item:hover {
+    background-color: #f5f5f5;
+}
+
+.add-company-selected-value {
+    width: 97%;
+    padding: 3px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: var(--input-field-background-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 36px; /* Ensure consistent height even when empty */
+}
+
+.add-company-selected-value:after {
+    content: '▼';
+    font-size: 12px;
+    margin-left: 8px;
+    color: #666;
+    position: absolute;
+    right: 10px;
+}

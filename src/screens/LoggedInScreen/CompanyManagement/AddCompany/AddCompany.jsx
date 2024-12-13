@@ -2,6 +2,17 @@ import React, { useState } from "react";
 import "./AddCompany.css";
 import { Icons } from "../../../../Icons/Icons";
 
+const states = [
+  'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh',
+  'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka',
+  'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram',
+  'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu',
+  'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal',
+  'Andaman and Nicobar Islands', 'Chandigarh', 
+  'Dadra and Nagar Haveli and Daman and Diu', 'Delhi', 'Jammu and Kashmir',
+  'Ladakh', 'Lakshadweep', 'Puducherry'
+];
+
 const AddCompany = () => {
   const [activeSection, setActiveSection] = useState(null);
   const [selectedState, setSelectedState] = useState("");
@@ -9,18 +20,10 @@ const AddCompany = () => {
   const [contactType, setContactType] = useState("Others");
   const [formData, setFormData] = useState({});
   const [formErrors, setFormErrors] = useState({});
-
-  const stateCityData = {
-    "Andhra Pradesh": ["Vijayawada", "Visakhapatnam", "Guntur"],
-    "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai"],
-    "Karnataka": ["Bangalore", "Mysore", "Hubli"],
-    "Maharashtra": ["Mumbai", "Pune", "Nagpur"],
-    "Gujarat": ["Ahmedabad", "Surat", "Vadodara"],
-    "Rajasthan": ["Jaipur", "Jodhpur", "Udaipur"],
-    "Uttar Pradesh": ["Lucknow", "Kanpur", "Varanasi"],
-    "West Bengal": ["Kolkata", "Howrah", "Darjeeling"],
-    "Punjab": ["Amritsar", "Ludhiana", "Chandigarh"],
-  };
+  const [isLoadingCities, setIsLoadingCities] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState('');
+  const [searchText, setSearchText] = useState('');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const sections = [
     {
@@ -92,7 +95,45 @@ const AddCompany = () => {
           label: "State",
           type: "select",
           name: "state",
-          options: Object.keys(stateCityData)
+          options: [
+            { value: 'Andhra Pradesh', label: 'Andhra Pradesh' },
+            { value: 'Arunachal Pradesh', label: 'Arunachal Pradesh' },
+            { value: 'Assam', label: 'Assam' },
+            { value: 'Bihar', label: 'Bihar' },
+            { value: 'Chhattisgarh', label: 'Chhattisgarh' },
+            { value: 'Goa', label: 'Goa' },
+            { value: 'Gujarat', label: 'Gujarat' },
+            { value: 'Haryana', label: 'Haryana' },
+            { value: 'Himachal Pradesh', label: 'Himachal Pradesh' },
+            { value: 'Jharkhand', label: 'Jharkhand' },
+            { value: 'Karnataka', label: 'Karnataka' },
+            { value: 'Kerala', label: 'Kerala' },
+            { value: 'Madhya Pradesh', label: 'Madhya Pradesh' },
+            { value: 'Maharashtra', label: 'Maharashtra' },
+            { value: 'Manipur', label: 'Manipur' },
+            { value: 'Meghalaya', label: 'Meghalaya' },
+            { value: 'Mizoram', label: 'Mizoram' },
+            { value: 'Nagaland', label: 'Nagaland' },
+            { value: 'Odisha', label: 'Odisha' },
+            { value: 'Punjab', label: 'Punjab' },
+            { value: 'Rajasthan', label: 'Rajasthan' },
+            { value: 'Sikkim', label: 'Sikkim' },
+            { value: 'Tamil Nadu', label: 'Tamil Nadu' },
+            { value: 'Telangana', label: 'Telangana' },
+            { value: 'Tripura', label: 'Tripura' },
+            { value: 'Uttar Pradesh', label: 'Uttar Pradesh' },
+            { value: 'Uttarakhand', label: 'Uttarakhand' },
+            { value: 'West Bengal', label: 'West Bengal' },
+            // Union Territories
+            { value: 'Andaman and Nicobar Islands', label: 'Andaman and Nicobar Islands' },
+            { value: 'Chandigarh', label: 'Chandigarh' },
+            { value: 'Dadra and Nagar Haveli and Daman and Diu', label: 'Dadra and Nagar Haveli and Daman and Diu' },
+            { value: 'Delhi', label: 'Delhi' },
+            { value: 'Jammu and Kashmir', label: 'Jammu and Kashmir' },
+            { value: 'Ladakh', label: 'Ladakh' },
+            { value: 'Lakshadweep', label: 'Lakshadweep' },
+            { value: 'Puducherry', label: 'Puducherry' }
+          ]
         },
         { label: "City", type: "select", name: "City" },
       ],
@@ -111,8 +152,8 @@ const AddCompany = () => {
             { label: "Department", type: "select", name: "department", options: ["HR", "Sales", "IT"], colSpan: 1 },
             { label: "Position", type: "select", name: "position", options: ["Manager", "Executive", "Staff"], colSpan: 1 },
             { label: "Email", type: "text", name: "contactEmail", button: "Verify", colSpan: 1 },
-            { label: "State", type: "select", name: "contactState", options: ["State 1", "State 2"], colSpan: 1 },
-            { label: "City", type: "select", name: "contactCity", options: selectedState ? stateCityData[selectedState] : [], colSpan: 1 },
+            { label: "State", type: "select", name: "contactState", options: states, colSpan: 1 },
+            { label: "City", type: "select", name: "contactCity", colSpan: 1 },
           ]
           : []),
 
@@ -120,8 +161,8 @@ const AddCompany = () => {
         ...(contactType === "Director"
           ? [
             { label: "Email", type: "text", name: "directorEmail" },
-            { label: "State", type: "select", name: "directorState", options: Object.keys(stateCityData), colSpan: 1 },
-            { label: "City", type: "select", name: "directorCity", options: selectedState ? stateCityData[selectedState] : [], colSpan: 1 },
+            { label: "State", type: "select", name: "directorState", options: states, colSpan: 1 },
+            { label: "City", type: "select", name: "directorCity", colSpan: 1 },
             { label: "Address", type: "textArea", name: "directorAddress" },
             { label: "Director Photo", type: "file", name: "directorPhoto" },
           ]
@@ -139,13 +180,12 @@ const AddCompany = () => {
           label: "State",
           type: "select",
           name: "shippingState",
-          options: Object.keys(stateCityData)
+          options: states
         },
         {
           label: "City",
           type: "select",
-          name: "shippingCity",
-          options: cities
+          name: "shippingCity"
         },
         {
           label: "Same as company address",
@@ -193,9 +233,52 @@ const AddCompany = () => {
     setActiveSection(activeSection === section ? null : section);
   };
 
+  const fetchCities = async (stateName) => {
+    try {
+      setIsLoadingCities(true);
+      // First get auth token
+      const authResponse = await fetch(
+        'https://www.universal-tutorial.com/api/getaccesstoken', {
+        headers: {
+          "Accept": "application/json",
+          "api-token": "jlHV4kzdnd_LhoKfOKiVbcKc4lEaDXBhwHQmbfkF7ld8Z3mbapYsZjBktdOy_UCwohQ",
+          "user-email": "tpsvipulpatna9798@gmail.com"
+        }
+      });
+      const authData = await authResponse.json();
+      const token = authData.auth_token;
+
+      // Then get cities
+      const response = await fetch(
+        `https://www.universal-tutorial.com/api/cities/${stateName}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Accept": "application/json"
+        }
+      });
+      const cityData = await response.json();
+
+      // Transform data for select options
+      const cityOptions = cityData.map(city => ({
+        value: city.city_name,
+        label: city.city_name
+      }));
+
+      setCities(cityOptions);
+    } catch (error) {
+      console.error('Error fetching cities:', error);
+    } finally {
+      setIsLoadingCities(false);
+    }
+  };
+
   const handleStateChange = (state) => {
     setSelectedState(state);
-    setCities(stateCityData[state] || []);
+    if (state) {
+      fetchCities(state);
+    } else {
+      setCities([]);
+    }
   };
 
   const validateField = (field, value) => {
@@ -301,30 +384,76 @@ const AddCompany = () => {
               </div>
             );
           } else if (item.type === "select") {
+            const isStateField = item.name.toLowerCase().includes('state');
+            const isCityField = item.name.toLowerCase().includes('city');
+            const options = isCityField ? cities : (item.options || []);
+            
+            const filteredOptions = options.filter(opt => {
+              if (!isStateField && !isCityField) return true; // Don't filter if not state/city
+              const optionValue = typeof opt === 'object' ? opt.label : opt;
+              return optionValue.toLowerCase().includes(searchText.toLowerCase());
+            });
+
             return (
               <div key={index} className={`input-group ${item.colSpan ? `col-span-${item.colSpan}` : ''}`}>
                 <label>
                   {item.label}
                   {item.required && <span className="required-indicator">*</span>}
                 </label>
-                <select
-                  name={item.name}
-                  className={`select-field ${formErrors[item.name] ? 'error' : ''}`}
-                  value={item.label === "Contact Type" ? contactType : (formData[item.name] || '')}
-                  onChange={(e) => {
-                    handleInputChange(item.name, e.target.value);
-                    if (item.label === "Contact Type") {
-                      setContactType(e.target.value);
-                    } else if (item.label === "State") {
-                      handleStateChange(e.target.value);
-                    }
-                  }}
-                >
-                  <option value="" style={{ display: "none" }}></option>
-                  {item?.options?.map((option, idx) => (
-                    <option key={idx} value={option}>{option}</option>
-                  ))}
-                </select>
+                <div className="add-company-select-wrapper">
+                  <div 
+                    className="add-company-selected-value"
+                    onClick={() => {
+                      setIsDropdownOpen(activeDropdown !== item.name);
+                      setActiveDropdown(activeDropdown !== item.name ? item.name : '');
+                      setSearchText('');
+                    }}
+                  >
+                    {formData[item.name] || ''}
+                  </div>
+                  
+                  {activeDropdown === item.name && (
+                    <div className="add-company-dropdown-list">
+                      {(isStateField || isCityField) && (
+                        <input
+                          type="text"
+                          className="add-company-search-input"
+                          placeholder={`Search ${item.label}...`}
+                          value={searchText}
+                          onChange={(e) => setSearchText(e.target.value)}
+                          onClick={(e) => e.stopPropagation()}
+                        />
+                      )}
+                      
+                      {isCityField && isLoadingCities ? (
+                        <div className="add-company-dropdown-item">Loading cities...</div>
+                      ) : (
+                        filteredOptions.map((option, idx) => {
+                          const value = typeof option === 'object' ? option.value : option;
+                          const label = typeof option === 'object' ? option.label : option;
+                          
+                          return (
+                            <div
+                              key={idx}
+                              className="add-company-dropdown-item"
+                              onClick={() => {
+                                handleInputChange(item.name, value);
+                                if (isStateField) {
+                                  handleStateChange(value);
+                                }
+                                setIsDropdownOpen(false);
+                                setActiveDropdown('');
+                                setSearchText('');
+                              }}
+                            >
+                              {label}
+                            </div>
+                          );
+                        })
+                      )}
+                    </div>
+                  )}
+                </div>
                 {commonErrorDisplay}
               </div>
             );

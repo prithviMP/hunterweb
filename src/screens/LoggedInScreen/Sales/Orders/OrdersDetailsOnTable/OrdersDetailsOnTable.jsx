@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./OrdersDetailsOnTable.css";
 import { Icons } from "../../../../../Icons/Icons";
 import { downloadAsExcel } from "../../../../../utils/excelDownload";
+import { preloadImages } from "../../../../../utils/imagePreloader";
 
-const OrdersDetailsOnTable = ({ companies, onCheckChange, onHeadersData, visibleHeaders }) => {
+const OrdersDetailsOnTable = ({ companies, onCheckChange, onHeadersData, visibleHeaders, searchQuery }) => {
     const [allChecked, setAllChecked] = useState(false);
     const [checkedItems, setCheckedItems] = useState(
         Array(companies.length).fill(false)
     );
 
+    const [imagesLoaded, setImagesLoaded] = useState(false);
     // Pagination states
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10); // Default value of 10 rows per page
@@ -186,6 +188,31 @@ const OrdersDetailsOnTable = ({ companies, onCheckChange, onHeadersData, visible
         });
     };
 
+    const filteredData = companies.filter((item) => {
+        const searchTerm = searchQuery?.toLowerCase() || '';
+        console.log(searchTerm)
+        return (
+            item.orderId.toLowerCase().includes(searchTerm) ||
+            item.salesId.toLowerCase().includes(searchTerm) ||
+            item.companyName.toLowerCase().includes(searchTerm) ||
+            item.details.id.toLowerCase().includes(searchTerm) ||
+            item.details.type.toLowerCase().includes(searchTerm) ||
+            item.details.location.toLowerCase().includes(searchTerm) ||
+            item.contacts.some(contact => contact.toLowerCase().includes(searchTerm)) ||
+            item.balance.toString().toLowerCase().includes(searchTerm)
+        );
+    });
+
+    useEffect(() => {
+        preloadImages(Icons)
+            .then(() => setImagesLoaded(true))
+            .catch(error => console.error('Error loading images:', error));
+    }, []);
+
+    if (!imagesLoaded) {
+        return <div>Loading...</div>; // Or a spinner/loading indicator
+    }
+
 
     return (
         <div className="company-management-container">
@@ -215,7 +242,7 @@ const OrdersDetailsOnTable = ({ companies, onCheckChange, onHeadersData, visible
                         </tr>
                     </thead>
                     <tbody>
-                        {currentItems.map((company, index) => (
+                        {filteredData.map((company, index) => (
                             <tr key={index}>
                                 <td className="relative">
                                     <span

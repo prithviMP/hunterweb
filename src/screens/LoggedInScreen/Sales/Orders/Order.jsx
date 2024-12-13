@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Order.css';
 import OrdersDetailsOnTable from './OrdersDetailsOnTable/OrdersDetailsOnTable';
 import { Icons } from '../../../../Icons/Icons';
-const Order = () => {
+const Order = ({ searchQuery }) => {
     const [visibleHeaders, setVisibleHeaders] = useState({
         orderId: true,
         salesId: true,
@@ -15,7 +15,7 @@ const Order = () => {
     const [tableHeaders, setTableHeaders] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
     const [selectedHeaders, setSelectedHeaders] = useState(visibleHeaders);
-    const [searchQuery, setSearchQuery] = useState('');
+    const [tableSearchQuery, setTableSearchQuery] = useState('');
 
     const cardDetails = [
         {
@@ -135,11 +135,11 @@ const Order = () => {
     };
 
     const handleSearch = (event) => {
-        setSearchQuery(event.target.value);
+        setTableSearchQuery(event.target.value);
     };
 
     const filteredCompanies = companies.filter(company => {
-        const searchTerm = searchQuery.toLowerCase();
+        const searchTerm = tableSearchQuery.toLowerCase();
         return (
             company.orderId.toLowerCase().includes(searchTerm) ||
             company.salesId.toLowerCase().includes(searchTerm) ||
@@ -218,7 +218,7 @@ const Order = () => {
                             }}
                             type="text"
                             placeholder='Search in table'
-                            value={searchQuery}
+                            value={tableSearchQuery}
                             onChange={handleSearch}
                         />
                     </div>
@@ -226,7 +226,7 @@ const Order = () => {
                     <img onClick={() => setShowPopup(true)} src={Icons.table_toggler} alt="icon" style={{ width: 30, height: 30, cursor: "pointer" }} />
                 </div>
             </div>
-            <OrdersDetailsOnTable companies={filteredCompanies} onCheckChange={setHasCheckedItems} onHeadersData={handleHeadersData} visibleHeaders={visibleHeaders} />
+            <OrdersDetailsOnTable searchQuery={searchQuery} companies={filteredCompanies} onCheckChange={setHasCheckedItems} onHeadersData={handleHeadersData} visibleHeaders={visibleHeaders} />
             {showPopup && (
                 <div className="sales-order-popup-overlay">
                     <div className="sales-order-popup-content">

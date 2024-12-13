@@ -1,7 +1,7 @@
 import React from "react";
 import "./DashboardSalesInfoCard.css"; // Import the CSS file for styling
 
-const DashboardSalesInfoCard = () => {
+const DashboardSalesInfoCard = ({ searchQuery }) => {
   const cardDetails = [
     {
       title: "Total Sales",
@@ -43,9 +43,14 @@ const DashboardSalesInfoCard = () => {
     },
   ];
 
+  // Filter cards based on search query
+  const filteredCards = cardDetails.filter((card) =>
+    card.title.toLowerCase().includes(searchQuery?.toLowerCase() || '')
+  );
+
   return (
     <div className="details-on-small-card-container" >
-      {cardDetails.map((card, index) => (
+      {filteredCards.map((card, index) => (
         <div key={index} className="card  border-radius box-shadow">
           <div className="card-header">
             <span className="card-title">{card.title}</span>

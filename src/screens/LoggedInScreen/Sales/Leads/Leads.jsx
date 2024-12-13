@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './Leads.css';
 import { Icons } from '../../../../Icons/Icons';
 import { downloadAsExcel } from '../../../../utils/excelDownload';
@@ -25,7 +25,7 @@ const getStatusColors = (status) => {
   };
 };
 
-const Leads = ({ onCheckChange = () => { } }) => {
+const Leads = ({ onCheckChange = () => { }, searchQuery }) => {
   const sales_leads = [
     {
       "status": "New",
@@ -124,7 +124,7 @@ const Leads = ({ onCheckChange = () => { } }) => {
 
   // Filter data based on search term
   const filteredLeads = sales_leads.filter(lead => {
-    const searchStr = searchTerm.toLowerCase();
+    const searchStr = searchTerm.toLowerCase() || searchQuery?.toLowerCase();
     return (
       lead.status.toLowerCase().includes(searchStr) ||
       lead.source.toLowerCase().includes(searchStr) ||
@@ -279,19 +279,273 @@ const Leads = ({ onCheckChange = () => { } }) => {
       message: ''
     });
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      console.log('Form submitted:', formData);
-      onClose();
+    const [errors, setErrors] = useState({});
+    const [cities, setCities] = useState([]);
+
+    const fetchCities = async (stateName) => {
+      try {
+        // First get auth token
+        const authResponse = await fetch(
+          'https://www.universal-tutorial.com/api/getaccesstoken', {
+          headers: {
+            "Accept": "application/json",
+            "api-token": "jlHV4kzdnd_LhoKfOKiVbcKc4lEaDXBhwHQmbfkF7ld8Z3mbapYsZjBktdOy_UCwohQ",
+            "user-email": "tpsvipulpatna9798@gmail.com"
+          }
+        });
+        const authData = await authResponse.json();
+        const token = authData.auth_token;
+
+        // Then get cities
+        const response = await fetch(
+          `https://www.universal-tutorial.com/api/cities/${stateName}`, {
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Accept": "application/json"
+          }
+        });
+        const cityData = await response.json();
+
+        // Transform data for select options
+        const cityOptions = cityData.map(city => ({
+          value: city.city_name,
+          label: city.city_name
+        }));
+
+        setCities(cityOptions);
+      } catch (error) {
+        console.error('Error fetching cities:', error);
+      }
+    };
+
+    const validateField = (name, value) => {
+      switch (name) {
+        case 'email':
+          return !value ? 'Email is required' :
+            !/\S+@\S+\.\S+/.test(value) ? 'Email is invalid' : '';
+        case 'phoneNumber':
+          return !value ? 'Phone number is required' :
+            !/^\d{10}$/.test(value) ? 'Phone number must be 10 digits' : '';
+        case 'contactName':
+          return !value ? 'Contact name is required' : '';
+        case 'assignUser':
+          return !value ? 'Please select a user' : '';
+        case 'source':
+          return !value ? 'Please select a source' : '';
+        case 'state':
+          return !value ? 'Please select a state' : '';
+        case 'city':
+          return !value ? 'Please select a city' : '';
+        case 'message':
+          return !value ? 'Message is required' : '';
+        default:
+          return '';
+      }
     };
 
     const handleChange = (e) => {
-      setFormData({
-        ...formData,
-        [e.target.name]: e.target.value
-      });
+      const { name, value } = e.target;
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+
+      // Clear error when user starts typing
+      if (errors[name]) {
+        setErrors(prev => ({
+          ...prev,
+          [name]: ''
+        }));
+      }
+
+      if (name === 'state') {
+        fetchCities(value);
+      }
     };
 
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Validate all fields
+      const newErrors = {};
+      Object.keys(formData).forEach(key => {
+        if (key !== 'companyName') { // Skip validation for optional fields
+          const error = validateField(key, formData[key]);
+          if (error) newErrors[key] = error;
+        }
+      });
+
+      setErrors(newErrors);
+
+      // If no errors, submit the form
+      if (Object.keys(newErrors).length === 0) {
+        console.log('Form submitted:', formData);
+        onClose();
+      }
+    };
+
+    const renderField = (label, name, type = 'text', options = null) => {
+      const isRequired = name !== 'companyName';
+      const [searchTerm, setSearchTerm] = useState('');
+      const [isOpen, setIsOpen] = useState(false);
+      const dropdownRef = useRef(null);
+
+      useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setIsOpen(false);
+          }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, []);
+
+      const filteredOptions = options?.filter(opt =>
+        opt.label.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
+      if (type === 'select' && (name === 'state' || name === 'city')) {
+        return (
+          <div className="leads-create-form-group">
+            <label>
+              {label}
+              {isRequired && <span style={{ color: 'red' }}>*</span>}
+            </label>
+            <div className="custom-select" style={{ position: 'relative' }} ref={dropdownRef}>
+              <div
+                className="select-header"
+                onClick={() => setIsOpen(!isOpen)}
+                style={{
+                  border: '1px solid #ddd',
+                  padding: '8px',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  background: '#fff',
+                  fontFamily:'var(--manrope)',
+                  fontSize:14
+                }}
+              >
+                {formData[name] || `Select ${label}`}
+              </div>
+
+              {isOpen && (
+                <div className="select-dropdown" style={{
+                  position: 'absolute',
+                  top: '100%',
+                  left: 0,
+                  right: 0,
+                  maxHeight: '200px',
+                  overflowY: 'auto',
+                  background: '#fff',
+                  border: '1px solid #ddd',
+                  borderRadius: '8px',
+                  zIndex: 1000,
+                  marginTop: '4px',
+                 
+                }}>
+                  <div style={{ padding: '8px', position: 'sticky', top: 0, background: '#fff' }}>
+                    <input
+                      type="text"
+                      placeholder={`Search ${label}...`}
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      onClick={(e) => e.stopPropagation()}
+                      style={{
+                        width: '92%',
+                        padding: '8px',
+                        border: '1px solid #ddd',
+                        borderRadius: '4px',
+                        
+                      }}
+                    />
+                  </div>
+                  <div style={{ maxHeight: '130px', overflowY: 'auto' }}>
+                    {filteredOptions?.map(opt => (
+                      <div
+                        key={opt.value}
+                        onClick={() => {
+                          handleChange({
+                            target: { name, value: opt.value }
+                          });
+                          setIsOpen(false);
+                          setSearchTerm('');
+                        }}
+                        style={{
+                          padding: '8px',
+                          cursor: 'pointer',
+                          borderBottom: '1px solid #eee',
+                          fontFamily:'var(--manrope)',
+                          ':hover': {
+                            backgroundColor: '#f5f5f5'
+                          }
+                        }}
+                      >
+                        {opt.label}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+            {errors[name] && (
+              <div className="error-message" style={{
+                color: 'red',
+                fontSize: '12px',
+                marginTop: '4px'
+              }}>
+                {errors[name]}
+              </div>
+            )}
+          </div>
+        );
+      }
+
+      // Return original rendering for other fields
+      return (
+        <div className="leads-create-form-group">
+          <label>
+            {label}
+            {isRequired && <span style={{ color: 'red' }}>*</span>}
+          </label>
+          {type === 'select' ? (
+            <select
+              name={name}
+              value={formData[name]}
+              onChange={handleChange}
+              required={isRequired}
+              noValidate
+            >
+              <option value="">Select {label}</option>
+              {options?.map(opt => (
+                <option key={opt.value} value={opt.value}>{opt.label}</option>
+              ))}
+            </select>
+          ) : (
+            <input
+              type={type}
+              name={name}
+              value={formData[name]}
+              onChange={handleChange}
+              required={isRequired}
+              noValidate
+            />
+          )}
+          {errors[name] && (
+            <div className="error-message" style={{
+              color: 'red',
+              fontSize: '12px',
+              marginTop: '4px'
+            }}>
+              {errors[name]}
+            </div>
+          )}
+        </div>
+      );
+    };
     return (
       <div className="leads-create-popup-overlay">
         <div className="leads-create-popup-content">
@@ -299,102 +553,131 @@ const Leads = ({ onCheckChange = () => { } }) => {
             <h3>Create New Lead</h3>
             <button className="leads-create-close-btn" onClick={onClose}>×</button>
           </div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} noValidate>
             <div className="leads-create-form-row">
-              <div className="leads-create-form-group">
-                <label>Assign User *</label>
-                <select name="assignUser" onChange={handleChange} required>
-                  <option value="">Select User</option>
-                  {/* Add your user options here */}
-                </select>
-              </div>
-              <div className="leads-create-form-group">
-                <label>Source *</label>
-                <select name="source" onChange={handleChange} required>
-                  <option value="">Select Source</option>
-                  <option value="Indiamart">Indiamart</option>
-                  <option value="E-Commerce">E-Commerce</option>
-                </select>
-              </div>
-
-              <div className="leads-create-form-group">
-                <label>Contact Name *</label>
-                <input
-                  type="text"
-                  name="contactName"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+              {renderField('Assign User', 'assignUser', 'select', [
+                { value: 'user1', label: 'User 1' },
+                { value: 'user2', label: 'User 2' }
+              ])}
+              {renderField('Source', 'source', 'select', [
+                { value: 'Indiamart', label: 'Indiamart' },
+                { value: 'E-Commerce', label: 'E-Commerce' }
+              ])}
+              {renderField('Contact Name', 'contactName')}
             </div>
 
             <div className="leads-create-form-row">
-
-              <div className="leads-create-form-group">
-                <label>Company Name</label>
-                <input
-                  type="text"
-                  name="companyName"
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className="leads-create-form-group">
-                <label>Email *</label>
-                <input
-                  type="email"
-                  name="email"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+              {renderField('Company Name', 'companyName')}
+              {renderField('Email', 'email', 'email')}
             </div>
 
             <div className="leads-create-form-row">
-
               <div className="leads-create-form-group">
-                <label>Phone Number *</label>
+                <label>Phone Number <span style={{ color: 'red' }}>*</span></label>
                 <div className="leads-create-phone-input">
-                  <span style={{ fontSize: 14, fontWeight: 500, fontFamily: 'var(--manrope)', background: '#FFF', padding: '8px', borderRadius: '8px', border: "1px solid #ddd" }} >+91</span>
+                  <span style={{
+                    fontSize: 14,
+                    fontWeight: 500,
+                    fontFamily: 'var(--manrope)',
+                    background: '#FFF',
+                    padding: '8px',
+                    borderRadius: '8px',
+                    border: "1px solid #ddd"
+                  }}>
+                    +91
+                  </span>
                   <input
                     type="tel"
                     name="phoneNumber"
+                    value={formData.phoneNumber}
                     onChange={handleChange}
                     required
+                    noValidate
                   />
                 </div>
-
-                <div className="leads-create-form-group">
-                  <label>State *</label>
-                  <select name="state" onChange={handleChange} required>
-                    <option value="">Select State</option>
-                    {/* Add your state options here */}
-                  </select>
-                </div>
-
-                <div className="leads-create-form-group">
-                  <label>City *</label>
-                  <select name="city" onChange={handleChange} required>
-                    <option value="">Select City</option>
-                    {/* Add your city options here */}
-                  </select>
-                </div>
-
+                {errors.phoneNumber && (
+                  <div className="error-message" style={{
+                    color: 'red',
+                    fontSize: '12px',
+                    marginTop: '4px'
+                  }}>
+                    {errors.phoneNumber}
+                  </div>
+                )}
               </div>
-            </div>
 
+              {renderField('State', 'state', 'select', [
+                { value: 'Andhra Pradesh', label: 'Andhra Pradesh' },
+                { value: 'Arunachal Pradesh', label: 'Arunachal Pradesh' },
+                { value: 'Assam', label: 'Assam' },
+                { value: 'Bihar', label: 'Bihar' },
+                { value: 'Chhattisgarh', label: 'Chhattisgarh' },
+                { value: 'Goa', label: 'Goa' },
+                { value: 'Gujarat', label: 'Gujarat' },
+                { value: 'Haryana', label: 'Haryana' },
+                { value: 'Himachal Pradesh', label: 'Himachal Pradesh' },
+                { value: 'Jharkhand', label: 'Jharkhand' },
+                { value: 'Karnataka', label: 'Karnataka' },
+                { value: 'Kerala', label: 'Kerala' },
+                { value: 'Madhya Pradesh', label: 'Madhya Pradesh' },
+                { value: 'Maharashtra', label: 'Maharashtra' },
+                { value: 'Manipur', label: 'Manipur' },
+                { value: 'Meghalaya', label: 'Meghalaya' },
+                { value: 'Mizoram', label: 'Mizoram' },
+                { value: 'Nagaland', label: 'Nagaland' },
+                { value: 'Odisha', label: 'Odisha' },
+                { value: 'Punjab', label: 'Punjab' },
+                { value: 'Rajasthan', label: 'Rajasthan' },
+                { value: 'Sikkim', label: 'Sikkim' },
+                { value: 'Tamil Nadu', label: 'Tamil Nadu' },
+                { value: 'Telangana', label: 'Telangana' },
+                { value: 'Tripura', label: 'Tripura' },
+                { value: 'Uttar Pradesh', label: 'Uttar Pradesh' },
+                { value: 'Uttarakhand', label: 'Uttarakhand' },
+                { value: 'West Bengal', label: 'West Bengal' },
+                // Union Territories
+                { value: 'Andaman and Nicobar Islands', label: 'Andaman and Nicobar Islands' },
+                { value: 'Chandigarh', label: 'Chandigarh' },
+                { value: 'Dadra and Nagar Haveli and Daman and Diu', label: 'Dadra and Nagar Haveli and Daman and Diu' },
+                { value: 'Delhi', label: 'Delhi' },
+                { value: 'Jammu and Kashmir', label: 'Jammu and Kashmir' },
+                { value: 'Ladakh', label: 'Ladakh' },
+                { value: 'Lakshadweep', label: 'Lakshadweep' },
+                { value: 'Puducherry', label: 'Puducherry' }
+              ])}
+              {renderField('City', 'city', 'select', cities)}
+            </div>
 
             <div className="leads-create-form-group">
-              <label>Message *</label>
+              <label>Message <span style={{ color: 'red' }}>*</span></label>
               <textarea
                 name="message"
+                value={formData.message}
                 onChange={handleChange}
                 required
+                noValidate
                 placeholder="Type your message"
               />
+              {errors.message && (
+                <div className="error-message" style={{
+                  color: 'red',
+                  fontSize: '12px',
+                  marginTop: '4px'
+                }}>
+                  {errors.message}
+                </div>
+              )}
             </div>
 
-            <button type="submit" className="leads-create-submit-btn">Create Lead</button>
+            <div style={{ textAlign: 'center', marginTop: 10 }}>
+              <button
+                type="submit"
+                className="commonButtonCss"
+                style={{ borderRadius: 20, paddingLeft: 20, paddingRight: 20 }}
+              >
+                Create Lead
+              </button>
+            </div>
           </form>
         </div>
       </div>

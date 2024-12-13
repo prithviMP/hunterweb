@@ -9,7 +9,8 @@ import TopSellingStatesGraph from "./TopSellingStates/TopSellingStatesGraph";
 import SalesTargetVSachieved from "./SalesTarget/SalesTargetVSachieved";
 
 
-const Dashboard = () => {
+const Dashboard = ({ searchQuery }) => {
+  console.log(searchQuery);
   const [selectedMonth, setSelectedMonth] = useState('');
 
   const handleMonthSelect = (month) => {
@@ -19,7 +20,7 @@ const Dashboard = () => {
     <div className="dashboardMainContainer">
       <MonthSelectDropdown onMonthSelect={handleMonthSelect} Icons={Icons} />
       <div className="mt-5" style={{ marginTop: 15 }}>
-        <DashboardSalesInfoCard />
+        <DashboardSalesInfoCard searchQuery={searchQuery} />
       </div>
       <div className="mt-5" style={{ marginTop: 15, display: 'flex', justifyContent: 'space-between', gap: 10 }}>
         {/* SalesOverviewChart with 70% width */}

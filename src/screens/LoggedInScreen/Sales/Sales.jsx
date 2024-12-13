@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./Sales.css"; // Import the CSS file
 import Tabs from "./Report/Tabs/Tabs";
 import MonthSelectDropdown from "../../../componant/MonthSelectDropdown/MonthSelectDropdown";
@@ -12,7 +12,7 @@ import StockRequests from "./StockRequests/StockRequests";
 import Order from "./Orders/Order";
 import Leads from "./Leads/Leads";
 import SaleReversal from "./SaleReversal/SaleReversal";
-const Sales = () => {
+const Sales = ({ searchQuery }) => {
   const [selectedMonth, setSelectedMonth] = useState('');
   const [selectedYear, setSelectedYear] = useState('');
   const [activeTab, setActiveTab] = useState("Report"); // Track active tab
@@ -76,7 +76,7 @@ const Sales = () => {
     {
       name: 'ABC Solutions Pvt Ltd (sales)',
       location: 'Mumbai, Maharashtra',
-      revenue: '₹45,000.00',
+      revenue: '���45,000.00',
     },
   ];
 
@@ -118,8 +118,8 @@ const Sales = () => {
     },
     // Add more rows as needed
     ...Array(10).fill({
-      requestedOn: "14 Nov 2024 at 14:42:49",
-      product: "9273-Hunter ProConnect Wireless Presentation Base Unit",
+      requestedOn: "15 Nov 2024 at 14:42:49",
+      product: "9274-Hunter ProConnect Wireless Presentation Base Unit",
       requestedBy: "kiran.kk244@gmail.com",
     }),
   ];
@@ -186,7 +186,7 @@ const Sales = () => {
           </div>
 
           <div className="sales-information-card-section">
-            <SalesInfoCards />
+            <SalesInfoCards searchQuery={searchQuery} />
           </div>
 
           <div className="sales-monthly-graph border-radius">
@@ -198,16 +198,16 @@ const Sales = () => {
               </div>
             </div>
 
-            <MonthlySalesGraph downloadGraph={(downloadFn) => (graphDownloadRef.current = downloadFn)} />
+            <MonthlySalesGraph downloadGraph={(downloadFn) => (graphDownloadRef.current = downloadFn)} searchQuery={searchQuery} />
             <span className="monthlyGraphNoteText"><strong>Note:</strong>The amount are in Lakhs</span>
           </div>
 
           <div className="top-billed-partner-main-section mt-15" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', gap: 20, marginRight: 15 }}>
             <div className="top-billed-partner" style={{ flex: 1 }}>
-              <TopBilledPartners data={partnerData} onViewAll={handleViewAll} />
+              <TopBilledPartners data={partnerData} onViewAll={handleViewAll} searchQuery={searchQuery} />
             </div>
             <div className="top-build-product" style={{ flex: 1 }}>
-              <TopBilledProducts data={productData} onViewAll={handleViewAll} />
+              <TopBilledProducts data={productData} onViewAll={handleViewAll} searchQuery={searchQuery} />
             </div>
           </div>
         </>
@@ -215,22 +215,22 @@ const Sales = () => {
 
       {/* Order all componant */}
       {activeTab === "Orders" && (
-        <Order />
+        <Order searchQuery={searchQuery} />
       )}
 
       {/* Leads all componant */}
       {activeTab === "Leads" && (
-        <Leads />
+        <Leads searchQuery={searchQuery} />
       )}
 
       {/* Sales Reversal all componant */}
       {activeTab === "Sale Reversal" && (
-        <SaleReversal />
+        <SaleReversal searchQuery={searchQuery} />
       )}
 
       {/* Stock Requests all componant */}
       {activeTab === "Stock Requests" && (
-        <StockRequests stockRequests={stockRequests} onDeleteRequest={handleDeleteRequest} />
+        <StockRequests stockRequests={stockRequests} onDeleteRequest={handleDeleteRequest} searchQuery={searchQuery} />
       )}
 
     </div>
