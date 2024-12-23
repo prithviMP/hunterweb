@@ -1,0 +1,129 @@
+.company-management-container {
+    padding: 20px 10px 20px 0px;
+}
+
+.company-management-table {
+    border: 1px solid var(--table-border-color);
+    border-radius: 5px;
+}
+
+.company-management-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--white-color);
+    color: var(--table-header-color);
+}
+
+.company-management-table th,
+.company-management-table td {
+    padding: 12px;
+    text-align: left;
+}
+
+.company-management-table td {
+    font-family: var(--manrope);
+    border-bottom: 1px solid var(--table-border-color);
+    font-size: 14px;
+    color: var(--card-heading-text-color);
+}
+
+.company-management-table th {
+    background-color: var(--table-header-backgroung-color);
+    font-weight: var(--semi-bold);
+    font-family: var(--montserrat);
+    border-bottom: 1px solid var(--table-border-color);
+}
+
+.company-management-table th:first-child {
+    border-top-left-radius: 5px;
+    
+}
+
+.company-management-table th:nth-child(3) {
+    width: 190px;
+}
+
+@media screen and (min-width: 1400px) {
+    .company-management-table th:nth-child(3) {
+        width: 250px;
+    }
+}
+
+.company-management-table th:last-child {
+    border-top-right-radius: 5px;
+}
+
+.company-management-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+.company-management-table input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+}
+
+.delete-request-button {
+    text-align: right;
+    padding-bottom: 10px;
+}
+
+.credit-balance {
+    border: 1px solid var(--table-border-color);
+    width: 250px;
+    padding: 5px 10px;
+}
+
+.relative {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 55%;
+    left: 20px;
+    background: var(--white-color);
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+    min-width: 120px;
+}
+
+.dropdown-menu button {
+    display: block;
+    width: 100%;
+    padding: 8px 16px;
+    text-align: left;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--black-color);
+    font-family: var(--manrope);
+}
+
+.dropdown-menu button:hover {
+    background-color: #f5f5f5;
+}
+
+.dropdown-menu button.delete-option {
+    color: #ff0000;
+}
+
+.dropdown-menu button:not(:last-child) {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.pagination-container-company-management {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    justify-content: flex-end;
+    width: 200px;
+    gap: 10px;
+}
+
+.pagination-container-company-management-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}

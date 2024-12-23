@@ -1,0 +1,296 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px 0px 10px;
+    width: calc(100vw - 37px);
+}
+
+.home-page-header {
+    padding: 0 15px;
+    background-color: var(--white-color);
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+}
+
+.greeting-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.greeting-section-left h2 {
+    font-family: var(--montserrat);
+    font-size: 24px;
+    font-weight: var(--semi-bold);
+    line-height: 20px;
+    text-align: left;
+}
+
+.greeting-section-left p {
+    font-family: var(--montserrat);
+    font-size: 16px;
+    font-weight: var(--extra-semi-bold);
+    text-align: left;
+}
+
+.greeting-section-left p span {
+    font-weight: var(--extra-semi-bold);
+}
+
+.home-page-content {
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+    flex-direction: row;
+    width: 100%;
+}
+
+.home-page-map-container {
+    width: 55%;
+}
+
+.home-page-apps-container-wrapper {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.home-page-apps-container {
+
+    background: var(--white-color);
+    border-radius: 12px;
+    padding: 10px;
+    border: 1px solid var(--card-border);
+    height: calc(100vh - 175px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.home-page-apps-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.home-page-apps-header h2 {
+    font-family: var(--montserrat);
+    font-size: 26px;
+    font-weight: var(--extra-semi-bold);
+}
+
+.home-page-search-box {
+    display: flex;
+    align-items: center;
+    background: var(--white-color);
+    border-radius: 24px;
+    padding: 8px 16px;
+    border: 2px solid var(--card-border);
+}
+
+.home-page-search-box input {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 8px;
+    width: 200px;
+}
+
+.home-page-search-box button {
+    background: #007bff;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.home-page-apps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 10px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.home-page-app-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 10px 0px 10px;
+    border: 1px solid var(--table-border-color);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.home-page-app-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.404);
+    transform: translateY(2px);
+}
+
+.home-page-app-icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.home-page-app-icon img {
+    width: 32px;
+    height: 32px;
+
+}
+
+.home-page-app-icon h3 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    font-weight: var(--semi-bold);
+    font-family: var(--montserrat);
+    color: var(--black-color);
+    position: relative;
+    top: 3px;
+}
+
+.home-page-app-info p {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #A9A9A9;
+    font-weight: 400px;
+    font-family: var(--manrope);
+}
+
+.home-page-bottom-section {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.upcoming-birthday,
+.notifications {
+    flex: 1;
+    background: var(--white-color);
+    border-radius: 12px;
+    padding: 10px 15px;
+    border: 1px solid var(--card-border);
+}
+
+.upcoming-birthday h2,
+.notifications h2 {
+    font-family: var(--montserrat);
+    font-size: 16px;
+    font-weight: var(--semi-bold);
+    margin-bottom: 20px;
+    padding-left: 5px;
+}
+
+.birthday-list,
+.notification-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.birthday-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px 10px 0px;
+}
+
+.birthday-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.birthday-info h4 {
+    font-family: var(--manrope);
+    font-size: 14px;
+    margin: 0;
+    font-weight: 400;
+    color: var(--black-color);
+    line-height: 19px;
+}
+
+.birthday-info p {
+    font-size: 12px;
+    color: #A9A9A9;
+    margin: 0;
+    font-weight: 400;
+    font-family: var(--manrope);
+}
+
+.notification-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: var(--input-field-background-color);
+    margin-bottom: 10px;
+}
+
+.notification-item.info {
+    border-left: 4px solid var(--primary-color);
+}
+
+.notification-item.reminder {
+    border-left: 4px solid #FF8800;
+}
+
+.notification-item.success {
+    border-left: 4px solid #28A745;
+}
+
+.notification-item.warning {
+    border-left: 4px solid #EF4444;
+}
+
+.notification-content h4 {
+    font-family: var(--manrope);
+    font-size: 14px;
+    margin: 0;
+    color: var(--black-color);
+}
+
+
+.notification-content p {
+    font-size: 12px;
+    color: #4A4A4A;
+    margin: 5px 0 0 0;
+    font-weight: 400;
+    font-family: var(--manrope);
+}
+
+.fa-calendar{
+    background-color: var(--input-field-background-color);
+    padding: 15px;
+    border-radius: 50%;
+    color: var(--black-color);
+    font-size: 20px;
+}
+
+.home-page-apps-grid::-webkit-scrollbar {
+    width: 8px;
+}
+
+.home-page-apps-grid::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.home-page-apps-grid::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.home-page-apps-grid::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

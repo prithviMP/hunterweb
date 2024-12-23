@@ -3,26 +3,26 @@
     min-height: 100%;
     background-color: var(--main-background-color);
     padding: 15px 10px;
- 
+    width: 210px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     overflow-y: auto;
-   
 }
 
 /* Menu item style */
 .menu-item {
-    display: flex;
-    align-items: center;
+    width: 100%;
     padding: 10px;
     border-radius: 5px;
     text-decoration: none;
-    margin: 6px 0;
+    display: flex;
+    align-items: center;
 }
 
 .menu-item.selected {
-    background-color: #007bff;
+    background-color: #C0DEFF;
+    color: #007bff;
 }
 
 /* Text style */
@@ -35,14 +35,13 @@
 
 /* Style for selected menu item text */
 .menu-item.selected .menu-item-text {
-    color: white;
+    color: #007bff;
 }
 
 /* Icon image style */
 .icon-image {
     width: 18px;
     height: 18px;
-
 }
 
 /* Default icon will be hidden when the item is selected */
@@ -63,4 +62,25 @@
 .commoncss {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+
+.submenu {
+    padding-left: 20px;
+}
+
+.submenu-item {
+    display: block;
+    padding: 8px 10px;
+    color: #000;
+    text-decoration: none;
+    font-family: var(--manrope);
+    font-size: 14px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.submenu-item.selected {
+    background-color: #C0DEFF;
+    color: #007bff;
 }

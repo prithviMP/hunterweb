@@ -1,3 +1,5 @@
+import hunter_logo from "../assets/hunter_logo.png";
+
 // header page icons
 import user from "../assets/header/user.png";
 import setting from "../assets/header/setting.png";
@@ -57,9 +59,30 @@ import rejected from "../assets/sales/rejected.png";
 import table_toggler from "../assets/sales/table-toggler.png";
 import whatsapp_icon from "../assets/sales/whatsapp-icon.png";
 import email_icon from "../assets/sales/email_icon.png";
+
+//home page icons
+import home_page_header_img from "../assets/home-page/home_page_header_icon.png";
+import data_control from "../assets/home-page/data_controll.png";
+import dsr from "../assets/home-page/DSR.png";
+import website from "../assets/home-page/website.png";
+import hunterMail from "../assets/home-page/hunter_mail.png";
+import hr from "../assets/home-page/humun_resource.png";
+
+import E_CRM from "../assets/home-page/E_CRM.png";
+import inventory from "../assets/home-page/inventory.png";
+import logistics from "../assets/home-page/logistics.png";
+import marketing from "../assets/home-page/marketing.png";
+import PMS from "../assets/home-page/PMS.png";
+import projector_lamps from "../assets/home-page/projector_lamps.png";
+import purchases from "../assets/home-page/purchases.png";
+import service from "../assets/home-page/service.png";
+import tutorials from "../assets/home-page/tutorials.png";
+import user_controll from "../assets/home-page/user_controll.png";
+
 export const Icons = {
+  hunter_logo,
   user,
-  setting, 
+  setting,
   bell,
   priceList,
   mdi_company,
@@ -101,4 +124,22 @@ export const Icons = {
   table_toggler,
   whatsapp_icon,
   email_icon,
+  home_page_header_img,
+
+  //home page icons
+  data_control,
+  dsr,
+  website,
+  hunterMail,
+  hr,
+  E_CRM,
+  inventory,
+  logistics,
+  marketing,
+  PMS,
+  projector_lamps,
+  purchases,
+  service,
+  tutorials,
+  user_controll,
 };

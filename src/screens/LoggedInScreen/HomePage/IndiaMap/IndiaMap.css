@@ -1,0 +1,33 @@
+.india-map-container {
+    width: 100%; /* Full width */
+    height: auto; /* Auto-adjust height based on SVG */
+    max-width: 1200px; /* Optional: Limit maximum width */
+    margin: 0 auto; /* Center the map */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Add padding for spacing */
+}
+
+.india-map-container svg {
+    width: 100%; /* Ensure the SVG scales to fill the container */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+}
+
+/* Media Queries for Fine-Tuning */
+@media (max-width: 600px) {
+    .india-map-container {
+        padding: 10px;
+    }
+    .india-map-container svg {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+    .india-map-container {
+        padding: 15px;
+    }
+}
