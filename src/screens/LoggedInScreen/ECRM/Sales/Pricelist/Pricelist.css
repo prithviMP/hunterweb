@@ -1,0 +1,50 @@
+.pricelist-chart {
+    background-color: var(--white-color);
+    border-radius: 10px;
+    width: calc(100% - 10px);
+    padding-bottom: 15px;
+
+}
+
+.pricelist-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.pricelist-chart-header-left h1 {
+    font-size: 24px;
+    font-weight: var(--extra-semi-bold);
+    font-family: var(--montserrat);
+}
+
+.product-modal,
+.product-name,
+.product-meters,
+.product-hsn,
+.product-warranty {
+    font-size: 14px;
+    font-family: var(--manrope);
+    font-weight: 400;
+}
+
+.product-modal {
+    color: var(--primary-color);
+}
+
+.product-name,
+.product-meters {
+    color: #1A1A1A;
+}
+
+.product-hsn,
+.product-warranty {
+    color: #A9A9A9;
+}
+
+.product-hsn-warranty {
+    display: flex;
+    gap: 10px;
+    margin-top: -10px;
+}

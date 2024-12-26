@@ -84,7 +84,6 @@ const SalesTargetVSachieved = () => {
     return (
 
         <div className="sales-target-vs-achieved" style={{ height: "470px", width: "100%" }}>
-            {/* Adjust height by setting inline style */}
             <Chart options={chartOptions} series={chartSeries} type="bar" />
         </div>
 

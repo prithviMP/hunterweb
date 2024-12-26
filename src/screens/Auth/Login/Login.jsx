@@ -8,6 +8,8 @@ const LoginPage = ({ onLogin }) => {
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState({ username: '', password: '' });
+  const [apiError, setApiError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const validateForm = () => {
     let isValid = true;
@@ -29,20 +31,21 @@ const LoginPage = ({ onLogin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    localStorage.setItem('userToken', "jkhgfzxcfg");
-    onLogin();
-    // if (validateForm()) {
-    //   const data = {
-    //     identifier: username,
-    //     password: password,
-    //   };
-    //   const response = await loginUser(data);
 
-    //   if (response) {
-    //     localStorage.setItem('userToken', response.jwt);
-    //     onLogin();
-    //   }
-    // }
+    if (validateForm()) {
+      const data = {
+        identifier: username,
+        password: password,
+      };
+      const response = await loginUser(data);
+
+      if (response.status === 200) {
+        localStorage.setItem('userToken', response?.data?.jwt);
+        onLogin();
+      } else {
+        setApiError(response?.response?.data?.error?.message);
+      }
+    }
   };
 
   return (
@@ -59,16 +62,25 @@ const LoginPage = ({ onLogin }) => {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              placeholder='Enter your username'
             />
             {errors.username && <p className="error-message" style={{ marginTop: '2px' }}>{errors.username}</p>}
           </div>
           <div className="input-group">
             <label>Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <div style={{ position: 'relative' }}>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder='Enter your password'
+              />
+              <i 
+                className={showPassword ? "fa-solid fa-eye-slash" : "fa-solid fa-eye"} 
+                onClick={() => setShowPassword(!showPassword)}
+                style={{ position: 'absolute', right: '15px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer', color: 'var(--primary-color)' }}
+              ></i>
+            </div>
             {errors.password && <p className="error-message" style={{ marginTop: '2px' }}>{errors.password}</p>}
           </div>
           <div className="remember-me">
@@ -80,6 +92,7 @@ const LoginPage = ({ onLogin }) => {
             <label style={{ position: 'relative', top: '4px' }}>Remember me</label>
           </div>
           <button type="submit">Login</button>
+          {apiError && <p className="error-message" style={{ marginTop: '10px' }}>{apiError}</p>}
         </form>
       </div>
     </div>

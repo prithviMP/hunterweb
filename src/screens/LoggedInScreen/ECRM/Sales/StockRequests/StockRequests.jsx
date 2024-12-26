@@ -3,31 +3,35 @@ import "./StockRequests.css";
 import { Icons } from "../../../../../Icons/Icons";
 import CommonButton from "../../../../../componant/Button/CommonButton";
 
-const StockRequests = ({ stockRequests, onDeleteRequest, searchQuery }) => {
+const StockRequests = ({ onDeleteRequest, searchQuery }) => {
+
+    const stockRequests = [
+        {
+            requestedOn: "14 Nov 2024 at 14:42:49",
+            product: "9273-Hunter ProConnect Wireless Presentation Base Unit",
+            requestedBy: "kiran.kk244@gmail.com",
+        },
+        // Add more rows as needed
+        ...Array(10).fill({
+            requestedOn: "15 Nov 2024 at 14:42:49",
+            product: "9274-Hunter ProConnect Wireless Presentation Base Unit",
+            requestedBy: "kiran.kk244@gmail.com",
+        }),
+    ];
+
     const [allChecked, setAllChecked] = useState(false);
     const [checkedItems, setCheckedItems] = useState(() => {
         return new Array(stockRequests?.length || 0).fill(false);
     });
 
-    const filteredStockRequests = searchQuery 
+    const filteredStockRequests = searchQuery
         ? stockRequests.filter((request) =>
             request.requestedOn.toLowerCase().includes(searchQuery.toLowerCase()) ||
             request.product.toLowerCase().includes(searchQuery.toLowerCase()) ||
             request.requestedBy.toLowerCase().includes(searchQuery.toLowerCase())
-          )
+        )
         : stockRequests;
 
-    // Update checked items when stockRequests changes
-    useEffect(() => {
-        setCheckedItems(new Array(stockRequests?.length || 0).fill(false));
-        setAllChecked(false);
-    }, [stockRequests]);
-
-    // Update checked items when search changes
-    useEffect(() => {
-        setCheckedItems(new Array(filteredStockRequests?.length || 0).fill(false));
-        setAllChecked(false);
-    }, [searchQuery]);
 
     const handleSelectAll = (e) => {
         const newCheckedState = e.target.checked;
@@ -40,6 +44,10 @@ const StockRequests = ({ stockRequests, onDeleteRequest, searchQuery }) => {
         updatedCheckedItems[index] = !updatedCheckedItems[index];
         setCheckedItems(updatedCheckedItems);
         setAllChecked(updatedCheckedItems.every(Boolean));
+    };
+
+    const handleDeleteRequest = (index) => {
+        alert("deleted successfully")
     };
 
     return (
@@ -73,7 +81,7 @@ const StockRequests = ({ stockRequests, onDeleteRequest, searchQuery }) => {
                         />
                     )}
                 </div>
-                
+
             </div>
             <div className="stock-requests-table" style={{
                 marginTop: -10
@@ -99,7 +107,7 @@ const StockRequests = ({ stockRequests, onDeleteRequest, searchQuery }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredStockRequests.map((request, index) => (
+                        {filteredStockRequests?.map((request, index) => (
                             <tr key={index}>
                                 <td>
                                     <div

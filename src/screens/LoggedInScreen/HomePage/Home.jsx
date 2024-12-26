@@ -124,7 +124,20 @@ const Home = ({ handleAppClick }) => {
     const time = new Date().toLocaleTimeString();
     const [searchTerm, setSearchTerm] = useState("");
     const [isLoadingMap, setIsLoadingMap] = useState(true);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+    const userProfileJson = [
+        {
+            name: "Profile",
+            icon: <i className="fa-regular fa-user"></i>,
+            path: "/setting"
+        },
+        {
+            name: "Logout",
+            icon: <i className="fa-solid fa-arrow-right-from-bracket"></i>,
+            path: "/setting"
+        }
+    ]
     const handleMapLoad = () => {
         setTimeout(() => {
             setIsLoadingMap(false);
@@ -135,6 +148,21 @@ const Home = ({ handleAppClick }) => {
         app.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+    const handleUserProfileItemClick = (itemType) => {
+        if (itemType === "Logout") {
+            sessionStorage.clear();
+            localStorage.clear();
+            window.location.replace("/");
+        } else if (itemType === "Home") {
+            sessionStorage.removeItem("currentModule");
+            sessionStorage.removeItem("headerName");
+            window.location.reload();
+        }
+    };
+
     return (
         <div className="home-container">
             <div className="home-page-header box-shadow">
@@ -143,8 +171,17 @@ const Home = ({ handleAppClick }) => {
                         <h2>Good Morning, {userName}!</h2>
                         <p><span>{time}</span> | Pending Tasks: <span style={{ fontSize: "20px", position: "relative", top: "2px" }}>{pendingTasks}</span></p>
                     </div>
-                    <div className="home-page-header-img">
+                    <div className="home-page-header-img" onClick={toggleDropdown}>
                         <img src={Icons.home_page_header_img} alt="Home Page Header" />
+                        {isDropdownOpen && (
+                            <div className="dropdown-menu-home-page">
+                                {userProfileJson.map((item, index) => (
+                                    <div key={index} className="dropdown-item-home-page" onClick={() => handleUserProfileItemClick(item.name)}>
+                                        {item.icon} {item.name}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

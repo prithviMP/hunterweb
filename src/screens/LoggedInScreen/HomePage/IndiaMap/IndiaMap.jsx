@@ -19,7 +19,7 @@ const IndiaMap = ({ onLoad }) => {
             } else if (width < 1024) {
                 setMapScale(800); // For tablets
             } else {
-                setMapScale(1200); // For large screens
+                setMapScale(1000); // For large screens
             }
         };
 
@@ -66,7 +66,7 @@ const IndiaMap = ({ onLoad }) => {
                     {({ geographies }) =>
                         geographies.map((geo) => {
                             // Check if the current state is the one to be highlighted
-                            const isHighlighted = geo.properties.NAME_1 === "Bihar";
+                            const isHighlighted = geo.properties.st_nm === "Bihar";
                             return (
                                 <MemoizedGeography
                                     key={geo.rsmKey}

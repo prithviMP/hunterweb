@@ -238,7 +238,7 @@ const CallManager = () => {
       </div>
 
       <div className="company-management-container" style={{ marginTop: -30, width: '100%' }}>
-        <div className="company-management-table">
+        <div className="company-management-table company-management-table-css">
           <table className="box-shadow border-radius">
 
             <thead>

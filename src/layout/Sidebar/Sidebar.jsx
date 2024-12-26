@@ -17,7 +17,7 @@ export default function Sidebar({ setHeaderText }) {
             navigateTo: "/sales",
             subItems: [
                 { name: "Sales Reports", navigateTo: "/sales/reports" },
-                { name: "Leads", navigateTo: "/Leads" },
+                { name: "Leads", navigateTo: "/leads" },
                 { name: "Updated Partners", navigateTo: "/sales/updated-partners" },
                 { name: "Category Search", navigateTo: "/sales/category-search" },
                 { name: "Sales Order", navigateTo: "/sales/order" },
@@ -26,9 +26,9 @@ export default function Sidebar({ setHeaderText }) {
                 { name: "Receipt", navigateTo: "/sales/receipt" },
                 { name: "Credit Note", navigateTo: "/sales/credit-note" },
                 { name: "CPO", navigateTo: "/sales/cpo" },
-                { name: "Pricelist", navigateTo: "/pricelist" },
+                { name: "Pricelist", navigateTo: "/sales/pricelist" },
                 { name: "Sales Reversal", navigateTo: "/sales/reversal" },
-                { name: "Stock Request", navigateTo: "/sales" },
+                { name: "Stock Request", navigateTo: "/sales/stock-request" },
                 { name: "Campaign Search", navigateTo: "/sales/campaign-search" },
             ]
         },

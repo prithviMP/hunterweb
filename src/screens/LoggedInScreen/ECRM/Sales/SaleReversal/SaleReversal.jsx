@@ -177,11 +177,19 @@ const SaleReversal = ({ searchQuery }) => {
     });
     return (
         <>
-            <div className="details-on-small-card-container mt-15" >
-                <div className="create_so_and_download_button_sales_page">
-                    <button className="commonButtonCss" style={{ height: 38 }}> <span style={{ fontSize: 20, fontWeight: 500, paddingRight: 5, position: "relative", top: -2 }}>+</span> <span style={{ position: "relative", top: -5 }}>Create SO</span></button>
-                    <button onClick={handleDownload} className="commonButtonCss" style={{ backgroundColor: "#FFF", color: "var(--primary-color)", position: "relative", bottom: 4, marginLeft: 5 }}>Download <img src={Icons.download_icon} alt="icon" /></button>
+            <div className="create_so_and_download_button_sales_page ">
+                <div className="sale-reversal-create-so-and-download-button">
+                    <button className="commonButtonCss" style={{ height: 38 }}>
+                        <span style={{ fontSize: 20, fontWeight: 500, paddingRight: 5, position: "relative", top: -2 }}>+</span>
+                        <span style={{ position: "relative", top: -5 }}>Create Reversal</span></button>
+                    <button onClick={handleDownload} className="commonButtonCss"
+                        style={{ backgroundColor: "#FFF", color: "var(--primary-color)", }}>
+                        Download <img src={Icons.download_icon} alt="icon" /></button>
                 </div>
+
+            </div>
+            <div className="details-on-small-card-container mt-15" >
+
                 {cardDetails.map((card, index) => (
                     <div key={index} className="card  border-radius box-shadow">
                         <div className="card-header">

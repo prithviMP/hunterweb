@@ -294,3 +294,32 @@
 .home-page-apps-grid::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+.home-page-dropdown-menu {
+    font-weight: bold;
+    color: #5B2AB5;
+}
+.home-page-header-img{
+    position: relative;
+    cursor: pointer;
+}
+.dropdown-menu-home-page{
+    position: absolute;
+    top: 100%;
+    left: -100px;
+    right:0px;
+    width: 140px;
+    background-color: var(--white-color);
+    border-radius: 10px;
+    border: 1px solid var(--card-border);
+    padding: 10px;
+    z-index: 1000;
+}
+.dropdown-item-home-page{
+    font-family: var(--montserrat);
+    font-size: 14px;
+    font-weight: var(--semi-bold);
+    color: var(--black-color);
+    cursor: pointer;
+    padding: 10px;
+}

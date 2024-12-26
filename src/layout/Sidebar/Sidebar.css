@@ -1,13 +1,13 @@
 /* Sidebar container */
 .sidebar {
-    min-height: 100%;
+    min-height: 100vh;
     background-color: var(--main-background-color);
     padding: 15px 10px;
-    width: 210px;
+    min-width: 210px !important;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    overflow-y: auto;
+    overflow-x: hidden !important;
 }
 
 /* Menu item style */

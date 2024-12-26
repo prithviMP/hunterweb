@@ -1,13 +1,18 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "../screens/LoggedInScreen/ECRM/Dashboard/Dashboard";
-import Sales from "../screens/LoggedInScreen/ECRM/Sales/Sales";
 import CallManager from "../screens/LoggedInScreen/ECRM/CallManager/CallManager";
 import PerformanceMetrics from "../screens/LoggedInScreen/ECRM/PerformanceMetrics/PerformanceMetrics";
 import Targets from "../screens/LoggedInScreen/ECRM/Targets/Targets";
 import InvoiceManagement from "../screens/LoggedInScreen/ECRM/InvoiceManagement/InvoiceManagement";
-import Pricelist from "../screens/LoggedInScreen/ECRM/Pricelist/Pricelist";
+import Pricelist from "../screens/LoggedInScreen/ECRM/Sales/Pricelist/Pricelist";
 import CompanyManagement from "../screens/LoggedInScreen/ECRM/CompanyManagement/CompanyManagement";
+import Leads from "../screens/LoggedInScreen/ECRM/Sales/Leads/Leads";
+import SalesReport from "../screens/LoggedInScreen/ECRM/Sales/SalesReport/SalesReport";
+import SaleReversal from "../screens/LoggedInScreen/ECRM/Sales/SaleReversal/SaleReversal";
+import StockRequests from "../screens/LoggedInScreen/ECRM/Sales/StockRequests/StockRequests";
+import Order from "../screens/LoggedInScreen/ECRM/Sales/Orders/Order";
+import Invoice from "../screens/LoggedInScreen/ECRM/Sales/Invoice/Invoice";
 
 function AppNavigator({ searchQuery, currentModule }) {
     const renderModule = () => {
@@ -33,7 +38,6 @@ function AppNavigator({ searchQuery, currentModule }) {
                     <Routes>
                         <Route path="/" element={<Navigate to="dashboard" replace />} />
                         <Route path="dashboard" element={<Dashboard searchQuery={searchQuery} />} />
-                        <Route path="sales" element={<Sales searchQuery={searchQuery} />} />
                         <Route path="call-manager" element={<CallManager searchQuery={searchQuery} />} />
                         <Route
                             path="performance-metrics"
@@ -44,11 +48,19 @@ function AppNavigator({ searchQuery, currentModule }) {
                             path="invoice-management"
                             element={<InvoiceManagement searchQuery={searchQuery} />}
                         />
-                        <Route path="pricelist" element={<Pricelist searchQuery={searchQuery} />} />
+
                         <Route
                             path="company-management"
                             element={<CompanyManagement searchQuery={searchQuery} />}
                         />
+                        <Route path="leads" element={<Leads searchQuery={searchQuery} />} />
+
+                        <Route path="/sales/pricelist" element={<Pricelist searchQuery={searchQuery} />} />
+                        <Route path="/sales/reports" element={<SalesReport searchQuery={searchQuery} />} />
+                        <Route path="/sales/reversal" element={<SaleReversal searchQuery={searchQuery} />} />
+                        <Route path="/sales/stock-request" element={<StockRequests searchQuery={searchQuery} />} />
+                        <Route path="/sales/order" element={<Order searchQuery={searchQuery} />} />
+                        <Route path="/sales/invoice" element={<Invoice searchQuery={searchQuery} />} />
                     </Routes>
                 );
             case 'Service':
@@ -60,7 +72,7 @@ function AppNavigator({ searchQuery, currentModule }) {
             case 'Projector Lamps':
                 return null;
             case 'Tutorial':
-                    return null;
+                return null;
             default:
                 return null;
         }

@@ -19,7 +19,7 @@ const CompanyManagementTable = ({ companies, onCheckChange }) => {
         const newCheckedState = !allChecked;
         setAllChecked(newCheckedState);
         setCheckedItems(Array(companies?.length).fill(newCheckedState));
-        
+
         // Notify parent component about the change
         onCheckChange(newCheckedState);
     };
@@ -30,7 +30,7 @@ const CompanyManagementTable = ({ companies, onCheckChange }) => {
             [index]: !checkedItems[index]
         };
         setCheckedItems(newCheckedItems);
-        
+
         // Notify parent if any items are checked
         const hasChecked = Object.values(newCheckedItems).some(value => value);
         onCheckChange(hasChecked);
@@ -122,7 +122,7 @@ const CompanyManagementTable = ({ companies, onCheckChange }) => {
 
     return (
         <div className="company-management-container">
-            <div className="company-management-table">
+            <div className="company-management-table company-management-table-css">
                 <table className="box-shadow border-radius">
                     <thead>
                         <tr>
@@ -145,20 +145,20 @@ const CompanyManagementTable = ({ companies, onCheckChange }) => {
                         {companies.length === 0 && (
                             <tr style={{ height: 200 }}><td colSpan="6" style={{ textAlign: "center" }}>No companies found</td></tr>
                         )}
-                       
-                        
+
+
                         {companies.length > 0 && currentItems?.map((company, index) => (
                             <tr key={index}>
-                                <td className="relative"> 
-                                    <span 
+                                <td className="relative">
+                                    <span
                                         onClick={(e) => handleEllipsisClick(index, e)}
-                                        style={{ 
-                                            color: "var(--black-color)", 
-                                            fontSize: 25, 
-                                            fontWeight: 800, 
-                                            position: "relative", 
+                                        style={{
+                                            color: "var(--black-color)",
+                                            fontSize: 25,
+                                            fontWeight: 800,
+                                            position: "relative",
                                             bottom: 9,
-                                            cursor: "pointer" 
+                                            cursor: "pointer"
                                         }}
                                     >
                                         ...

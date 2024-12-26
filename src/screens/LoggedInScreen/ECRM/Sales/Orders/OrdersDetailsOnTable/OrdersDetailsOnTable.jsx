@@ -158,35 +158,7 @@ const OrdersDetailsOnTable = ({ companies, onCheckChange, onHeadersData, visible
         window.open(mailtoUrl);
     };
 
-    const handleDownload = () => {
-        // Define headers for Excel file based on visible columns
-        const headers = [
-            { key: 'orderId', label: 'Order ID' },
-            { key: 'salesId', label: 'Sales ID' },
-            { key: 'status', label: 'Status' },
-            { key: 'company', label: 'Company' },
-            { key: 'contact', label: 'Contact' },
-            { key: 'balance', label: 'Balance' }
-        ].filter(header => visibleHeaders[header.key]);
 
-        // Format the data for Excel
-        const formattedData = companies.map(company => ({
-            orderId: company.orderId,
-            salesId: company.salesId,
-            status: company.status,
-            company: company.companyName,
-            contact: company.contacts[0],
-            balance: company.balance
-        }));
-
-        // Use the download utility
-        downloadAsExcel({
-            data: formattedData,
-            headers,
-            filename: 'orders.xlsx',
-            sheetName: 'Orders'
-        });
-    };
 
     const filteredData = companies.filter((item) => {
         const searchTerm = searchQuery?.toLowerCase() || '';
@@ -216,11 +188,8 @@ const OrdersDetailsOnTable = ({ companies, onCheckChange, onHeadersData, visible
 
     return (
         <div className="company-management-container">
-            <div className="create_so_and_download_button_sales_page">
-                <button className="commonButtonCss" style={{ height: 40 }}> <span style={{ fontSize: 20, fontWeight: 500, paddingRight: 5, position: "relative", top: -2 }}>+</span> <span style={{ position: "relative", top: -4 }}>Create SO</span></button>
-                <button onClick={handleDownload} className="commonButtonCss" style={{ backgroundColor: "#FFF", color: "var(--primary-color)", position: "relative", bottom: 4, marginLeft: 5 }}>Download <img src={Icons.download_icon} alt="icon" /></button>
-            </div>
-            <div className="company-management-table">
+
+            <div className="company-management-table company-management-table-css">
                 <table className="box-shadow border-radius">
                     <thead>
                         <tr>
@@ -260,12 +229,13 @@ const OrdersDetailsOnTable = ({ companies, onCheckChange, onHeadersData, visible
                                     </span>
                                     {activeDropdown === index && (
                                         <div className="orderDetailsSalesPage-dropdown-menu" style={{ width: 180 }}>
-                                            <button onClick={() => console.log('Create Quote')}>Create Quote</button>
+                                            <button style={{ color: "var(--black-color)" }} onClick={() => console.log('Create Quote')}>Create Quote</button>
                                             <div className="orderDetailsSalesPage-dropdown-submenu">
-                                                <button>Send Payment Link</button>
+                                                <button
+                                                    style={{ color: "var(--black-color)" }}>Send Payment Link</button>
                                                 <div className="orderDetailsSalesPage-submenu-content">
                                                     <button onClick={() => handleWhatsAppClick(company)}>
-                                                        <img src={Icons.whatsapp_icon} alt="WhatsApp icon" /> WhatsApp
+                                                        <img src={Icons.whatsapp_icon} alt="WhatsApp icon" /> <span style={{ color: "var(--black-color)" }}>WhatsApp</span>
                                                     </button>
                                                     <button onClick={() => handleEmailClick(company)}>
                                                         <img src={Icons.email_icon} alt="Email icon" /> E-mail
@@ -397,7 +367,7 @@ const OrdersDetailsOnTable = ({ companies, onCheckChange, onHeadersData, visible
                         <option value={50}>50</option>
                     </select>
                 </div>
-                <div>
+                <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", gap: 0 }}>
                     {renderPagination()}
                 </div>
 

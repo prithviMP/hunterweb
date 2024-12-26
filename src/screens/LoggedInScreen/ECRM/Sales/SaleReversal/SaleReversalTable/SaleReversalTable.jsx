@@ -202,13 +202,10 @@ const SaleReversalTable = ({ companies, onCheckChange, onHeadersData, visibleHea
 
     return (
         <div className="company-management-container">
-            <div className="create_so_and_download_button_sales_page">
-                <button className="commonButtonCss" style={{ height: 40 }}> <span style={{ fontSize: 20, fontWeight: 500, paddingRight: 5, position: "relative", top: -2 }}>+</span> <span style={{ position: "relative", top: -4 }}>Create SO</span></button>
-                <button onClick={handleDownload} className="commonButtonCss" style={{ backgroundColor: "#FFF", color: "var(--primary-color)", position: "relative", bottom: 4, marginLeft: 5 }}>Download <img src={Icons.download_icon} alt="icon" /></button>
-            </div>
+
             <div className="company-management-table sale-reversal-table">
                 <div style={{ overflowX: 'auto' }}>
-                    <table className="box-shadow border-radius" style={{ minWidth: '115%' }}>
+                    <table className="box-shadow border-radius company-management-table-css" style={{ minWidth: '115%' }}>
                         <thead>
                             <tr>
                                 <th style={{ width: 20 }}></th>
@@ -284,7 +281,27 @@ const SaleReversalTable = ({ companies, onCheckChange, onHeadersData, visibleHea
                                     {visibleHeaders.status && (
                                         <td>
                                             <div style={{ display: "flex", flexDirection: "column" }}>
-                                                <span className="black-color font-weight_600">
+                                                <span
+                                                    className="font-weight_600"
+                                                    style={{
+                                                        backgroundColor:
+                                                            company.status === 'Verified' ? '#FCE3CC' :
+                                                                company.status === 'Created' ? '#B9D8FA' :
+                                                                    company.status === 'Void' ? '#E8CCFA' :
+                                                                        company.status === 'Approved' ? '#DFF6BE' :
+                                                                            'transparent',
+                                                        color:
+                                                            company.status === 'Verified' ? '#F29339' :
+                                                                company.status === 'Created' ? '#007BFF' :
+                                                                    company.status === 'Void' ? '#9747FF' :
+                                                                        company.status === 'Approved' ? '#578B3E' :
+                                                                            'inherit',
+                                                        padding: '6px 12px',
+                                                        borderRadius: '10px',
+                                                        display: 'inline-block',
+                                                        textAlign: "center"
+                                                    }}
+                                                >
                                                     {company.status}
                                                 </span>
                                             </div>
@@ -325,7 +342,7 @@ const SaleReversalTable = ({ companies, onCheckChange, onHeadersData, visibleHea
                                                 </span>
                                                 <span
                                                     style={{
-                                                        backgroundColor: company.status === 'wide' ? "#5DB947" : "#EF4444",
+                                                        backgroundColor: "#5DB947",
                                                         color: "#FFF",
                                                         width: 140,
                                                         textAlign: "center",
@@ -333,7 +350,7 @@ const SaleReversalTable = ({ companies, onCheckChange, onHeadersData, visibleHea
                                                     }}
                                                     className="border-radius"
                                                 >
-                                                    Hunter Club Joined
+                                                    {company.details.membership}
                                                 </span>
                                                 <span className="border border-radius credit-balance flex">
                                                     <span className="black-color">Credit Balance</span>
@@ -356,7 +373,7 @@ const SaleReversalTable = ({ companies, onCheckChange, onHeadersData, visibleHea
                                         </td>
                                     )}
                                     {visibleHeaders.unpaidInvoice && (
-                                        <td className="font-weight_600">
+                                        <td className="font-weight_600" style={{ color: "#EF4444" }}>
                                             {company.unpaidInvoice}
                                         </td>
                                     )}
@@ -387,7 +404,8 @@ const SaleReversalTable = ({ companies, onCheckChange, onHeadersData, visibleHea
                         <option value={50}>50</option>
                     </select>
                 </div>
-                <div>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
+
                     {renderPagination()}
                 </div>
 

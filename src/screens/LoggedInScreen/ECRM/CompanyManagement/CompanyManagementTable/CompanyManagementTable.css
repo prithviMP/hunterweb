@@ -14,8 +14,8 @@
     color: var(--table-header-color);
 }
 
-.company-management-table th,
-.company-management-table td {
+.company-management-table-css th,
+.company-management-table-css td {
     padding: 12px;
     text-align: left;
 }
@@ -36,7 +36,7 @@
 
 .company-management-table th:first-child {
     border-top-left-radius: 5px;
-    
+
 }
 
 .company-management-table th:nth-child(3) {
@@ -84,7 +84,7 @@
     background: var(--white-color);
     border: 1px solid #e0e0e0;
     border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     min-width: 120px;
 }

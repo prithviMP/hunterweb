@@ -425,8 +425,8 @@ const Leads = ({ onCheckChange = () => { }, searchQuery }) => {
                   borderRadius: '8px',
                   cursor: 'pointer',
                   background: '#fff',
-                  fontFamily:'var(--manrope)',
-                  fontSize:14
+                  fontFamily: 'var(--manrope)',
+                  fontSize: 14
                 }}
               >
                 {formData[name] || `Select ${label}`}
@@ -445,7 +445,7 @@ const Leads = ({ onCheckChange = () => { }, searchQuery }) => {
                   borderRadius: '8px',
                   zIndex: 1000,
                   marginTop: '4px',
-                 
+
                 }}>
                   <div style={{ padding: '8px', position: 'sticky', top: 0, background: '#fff' }}>
                     <input
@@ -459,7 +459,7 @@ const Leads = ({ onCheckChange = () => { }, searchQuery }) => {
                         padding: '8px',
                         border: '1px solid #ddd',
                         borderRadius: '4px',
-                        
+
                       }}
                     />
                   </div>
@@ -478,7 +478,7 @@ const Leads = ({ onCheckChange = () => { }, searchQuery }) => {
                           padding: '8px',
                           cursor: 'pointer',
                           borderBottom: '1px solid #eee',
-                          fontFamily:'var(--manrope)',
+                          fontFamily: 'var(--manrope)',
                           ':hover': {
                             backgroundColor: '#f5f5f5'
                           }
@@ -550,8 +550,12 @@ const Leads = ({ onCheckChange = () => { }, searchQuery }) => {
       <div className="leads-create-popup-overlay">
         <div className="leads-create-popup-content">
           <div className="leads-create-popup-header">
-            <h3>Create New Lead</h3>
-            <button className="leads-create-close-btn" onClick={onClose}>×</button>
+            <div className="leads-create-popup-header-left">
+              <h3>Create New Lead</h3>
+            </div>
+            <div className="leads-create-popup-header-right">
+              <button className="leads-create-close-btn" onClick={onClose}>×</button>
+            </div>
           </div>
           <form onSubmit={handleSubmit} noValidate>
             <div className="leads-create-form-row">
@@ -672,8 +676,8 @@ const Leads = ({ onCheckChange = () => { }, searchQuery }) => {
             <div style={{ textAlign: 'center', marginTop: 10 }}>
               <button
                 type="submit"
-                className="commonButtonCss"
-                style={{ borderRadius: 20, paddingLeft: 20, paddingRight: 20 }}
+                className="commonButtonCss create-lead-button"
+                style={{ borderRadius: 20, paddingLeft: 20, paddingRight: 20, width: 200 }}
               >
                 Create Lead
               </button>
@@ -689,24 +693,28 @@ const Leads = ({ onCheckChange = () => { }, searchQuery }) => {
 
   return (
     <div className="company-management-container">
-      <div className="create_so_and_download_button_sales_page">
-        <button
-          className="commonButtonCss"
-          style={{ height: 38 }}
-          onClick={() => setShowCreateLeadPopup(true)}
-        >
-          <span style={{ fontSize: 20, fontWeight: 500, paddingRight: 5, position: "relative", top: -2 }}>+</span>
-          <span style={{ position: "relative", top: -4 }}>Create Lead</span>
-        </button>
-        <button
-          className="commonButtonCss"
-          style={{ backgroundColor: "#FFF", color: "var(--primary-color)", position: "relative", bottom: 4, marginLeft: 5 }}
-          onClick={handleDownload}
-        >
-          Download <img src={Icons.download_icon} alt="icon" />
-        </button>
+      <div className="create_so_and_download_button_sales_page leads-create-button-container">
+        <div className="leads-create-button-container">
+          <button
+            className="commonButtonCss"
+            style={{ height: 38, width: 200 }}
+            onClick={() => setShowCreateLeadPopup(true)}
+          >
+            <span style={{ fontSize: 20, fontWeight: 500, paddingRight: 5, position: "relative", top: -2 }}>+</span>
+            <span style={{ position: "relative", top: -4 }}>Create Lead</span>
+          </button>
+        </div>
+        <div className="leads-create-button-container">
+          <button
+            className="commonButtonCss"
+            style={{ backgroundColor: "#FFF", color: "var(--primary-color)", position: "relative", bottom: 4, marginLeft: 5 }}
+            onClick={handleDownload}
+          >
+            Download <img src={Icons.download_icon} alt="icon" />
+          </button>
+        </div>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10, marginTop: 10 }}>
         <div className="filter-section-main-div" style={{ display: 'flex', gap: 10 }}>
           <button className="company-management-button commonButtonCss" style={{ width: 130 }}>
             <span style={{ paddingRight: 5 }}>
@@ -752,11 +760,13 @@ const Leads = ({ onCheckChange = () => { }, searchQuery }) => {
               onChange={handleSearch}
             />
           </div>
-
-          <img onClick={() => setShowPopup(true)} src={Icons.table_toggler} alt="icon" style={{ width: 30, height: 30, cursor: "pointer" }} />
+          <div className="leads-create-button-container" style={{ marginLeft: 10, position: "relative", top: 4 }}>
+            <img onClick={() => setShowPopup(true)} src={Icons.table_toggler} alt="icon" style={{ width: 30, height: 30, cursor: "pointer" }} />
+          </div>
         </div>
+
       </div>
-      <div className="company-management-table">
+      <div className="company-management-table company-management-table-css">
         <table className="box-shadow border-radius">
           <thead>
             <tr>
@@ -844,7 +854,7 @@ const Leads = ({ onCheckChange = () => { }, searchQuery }) => {
 
       {/* Pagination Section */}
       <div className="pagination-container-sales">
-        <div className="rows-per-page-sales">
+        <div className="rows-per-page-sales mt-10">
           <span style={{ fontSize: 14, fontWeight: 500, fontFamily: 'var(--manrope)' }}>Rows per page:</span>
           <select
             value={rowsPerPage}
@@ -857,23 +867,29 @@ const Leads = ({ onCheckChange = () => { }, searchQuery }) => {
             <option value={50}>50</option>
           </select>
         </div>
-        <div>
-          {renderPagination()}
+        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginTop: -20 }}>
+          <div className="leads-create-pagination-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            {renderPagination()}
+          </div>
         </div>
       </div>
 
 
       {showPopup && (
-        <div className="sales-order-popup-overlay">
+        <div className="sales-order-popup-overlay sales-order-popup-overlay-leads">
           <div className="sales-order-popup-content">
             <div className="sales-order-popup-header">
-              <h3 style={{ fontFamily: 'var(--montserrat)' }}>Customize Columns</h3>
-              <button
-                className="sales-order-close-btn"
-                onClick={() => setShowPopup(false)}
-              >
-                ×
-              </button>
+              <div className="sales-order-popup-header-left">
+                <h3 style={{ fontFamily: 'var(--montserrat)' }}>Customize Columns</h3>
+              </div>
+              <div className="sales-order-popup-header-right">
+                <button
+                  className="sales-order-close-btn"
+                  onClick={() => setShowPopup(false)}
+                >
+                  ×
+                </button>
+              </div>
             </div>
             <div className="sales-order-popup-body">
               {tableHeaders.map(header => (
@@ -902,14 +918,16 @@ const Leads = ({ onCheckChange = () => { }, searchQuery }) => {
               ))}
             </div>
             <div className="sales-order-popup-footer">
+              <div>
+                <button
+                  className="sales-order-apply-btn"
+                  onClick={handleApply}
+                  style={{ fontFamily: 'var(--montserrat)' }}
+                >
+                  Apply
+                </button>
+              </div>
 
-              <button
-                className="sales-order-apply-btn"
-                onClick={handleApply}
-                style={{ fontFamily: 'var(--montserrat)' }}
-              >
-                Apply
-              </button>
             </div>
           </div>
         </div>

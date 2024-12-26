@@ -153,8 +153,47 @@ const Order = ({ searchQuery }) => {
     });
 
 
+    const handleDownload = () => {
+        // Define headers for Excel file based on visible columns
+        const headers = [
+            { key: 'orderId', label: 'Order ID' },
+            { key: 'salesId', label: 'Sales ID' },
+            { key: 'status', label: 'Status' },
+            { key: 'company', label: 'Company' },
+            { key: 'contact', label: 'Contact' },
+            { key: 'balance', label: 'Balance' }
+        ].filter(header => visibleHeaders[header.key]);
+
+        // Format the data for Excel
+        const formattedData = companies.map(company => ({
+            orderId: company.orderId,
+            salesId: company.salesId,
+            status: company.status,
+            company: company.companyName,
+            contact: company.contacts[0],
+            balance: company.balance
+        }));
+
+        // Use the download utility
+        downloadAsExcel({
+            data: formattedData,
+            headers,
+            filename: 'orders.xlsx',
+            sheetName: 'Orders'
+        });
+    };
+
     return (
         <>
+            <div className="create_so_and_download_button_sales_page">
+                <div className="sales-order-create-so-and-download-button">
+                    <button className="commonButtonCss" style={{ height: 40 }}> <span style={{ fontSize: 20, fontWeight: 500, paddingRight: 5, position: "relative", top: -2 }}>+</span> <span style={{ position: "relative", top: -4 }}>Create SO</span></button>
+                </div>
+                <div className="sales-order-download-button">
+                    <button onClick={handleDownload} className="commonButtonCss" style={{ backgroundColor: "#FFF", color: "var(--primary-color)", }}>Download <img src={Icons.download_icon} alt="icon" /></button>
+                </div>
+
+            </div>
             <div className="details-on-small-card-container mt-15" >
                 {cardDetails.map((card, index) => (
                     <div key={index} className="card  border-radius box-shadow">
