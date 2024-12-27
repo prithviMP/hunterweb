@@ -697,7 +697,7 @@ const Leads = ({ onCheckChange = () => { }, searchQuery }) => {
         <div className="leads-create-button-container">
           <button
             className="commonButtonCss"
-            style={{ height: 38, width: 200 }}
+            style={{ height: 38, width: 150,marginTop:"-7px" }}
             onClick={() => setShowCreateLeadPopup(true)}
           >
             <span style={{ fontSize: 20, fontWeight: 500, paddingRight: 5, position: "relative", top: -2 }}>+</span>

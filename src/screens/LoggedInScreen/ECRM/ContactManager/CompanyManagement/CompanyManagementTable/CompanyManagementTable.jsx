@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./CompanyManagementTable.css";
-import { Icons } from "../../../../../Icons/Icons";
+import { Icons } from "../../../../../../Icons/Icons";
 
 const CompanyManagementTable = ({ companies, onCheckChange }) => {
     const [allChecked, setAllChecked] = useState(false);

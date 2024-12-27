@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./AddCompany.css";
-import { Icons } from "../../../../../Icons/Icons";
-import { createCompanyManagement } from "../../../../../services/api/companyManagement/repository";
-import { uploadFile } from "../../../../../services/api/upload/repository";
+import { Icons } from "../../../../../../Icons/Icons";
+import { createCompanyManagement } from "../../../../../../services/api/companyManagement/repository";
+import { uploadFile } from "../../../../../../services/api/upload/repository";
 import { toast } from "react-toastify";
+
 import axios from 'axios';
 const states = [
   'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh',
@@ -15,6 +16,8 @@ const states = [
   'Dadra and Nagar Haveli and Daman and Diu', 'Delhi', 'Jammu and Kashmir',
   'Ladakh', 'Lakshadweep', 'Puducherry'
 ];
+import { fetchCitiesBasedOnState } from "../../../../../../utils/cityService"; // Import the new service
+import { allDepartmentJson } from "../../../../../../utils/allDepartmentJson";
 
 const AddCompany = () => {
   const [activeSection, setActiveSection] = useState(null);
@@ -28,6 +31,38 @@ const AddCompany = () => {
   const [activeDropdown, setActiveDropdown] = useState('');
   const [searchText, setSearchText] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const categoryJson = [
+    { id: 1, name: "End Customer" },
+    { id: 2, name: "Channel Partner" },
+    { id: 3, name: "Vendor/Suppliers" },
+    { id: 4, name: "Internal" },
+    { id: 5, name: "Uncategories" },
+
+  ];
+
+  const subCategoryJson = [
+
+    // if End Customer selected
+    { id: 1, name: "Individual" },
+    { id: 2, name: "Corporate" },
+    { id: 3, name: "Education" },
+
+    // if vendor/suppliers selected
+    { id: 4, name: "Gloable Vendor" },
+    { id: 5, name: "Bharat Vendor" },
+    { id: 6, name: "Transport" },
+
+    // if End Channel Partner
+    { id: 7, name: "AV Channel Partner" },
+    { id: 8, name: "IT Channel Partner" },
+    { id: 9, name: "Home Cinema Channel Partner" },
+    { id: 10, name: "CCTV Channel Partner" },
+    { id: 11, name: "AVSI Channel Partner" },
+    { id: 12, name: "ITSI Channel Partner" }
+
+  ]
+
 
   const sections = [
     {
@@ -81,14 +116,31 @@ const AddCompany = () => {
           label: "Category",
           type: "select",
           name: "Category",
-          options: ["Category 1", "Category 2"],
+          options: categoryJson.map((category) => ({
+            value: category.name,
+            label: category.name
+          })),
           required: true
         },
         {
           label: "Sub Category",
           type: "select",
           name: "SubCategory",
-          options: ["SubCategory 1", "SubCategory 2"],
+          options: formData.Category === "End Customer" ?
+            subCategoryJson.filter(subCategory => subCategory.id <= 3).map((subCategory) => ({
+              value: subCategory.name,
+              label: subCategory.name
+            })) :
+            formData.Category === "Channel Partner" ?
+              subCategoryJson.filter(subCategory => subCategory.id >= 7 && subCategory.id <= 12).map((subCategory) => ({
+                value: subCategory.name,
+                label: subCategory.name
+              })) :
+              formData.Category === "Vendor/Suppliers" ?
+                subCategoryJson.filter(subCategory => subCategory.id >= 4 && subCategory.id <= 6).map((subCategory) => ({
+                  value: subCategory.name,
+                  label: subCategory.name
+                })) : [],
           required: true
         },
         { label: "GSTIN Category", type: "text", name: "GSTINCategory", required: true },
@@ -242,34 +294,7 @@ const AddCompany = () => {
   const fetchCities = async (stateName) => {
     try {
       setIsLoadingCities(true);
-      // First get auth token
-      const authResponse = await fetch(
-        'https://www.universal-tutorial.com/api/getaccesstoken', {
-        headers: {
-          "Accept": "application/json",
-          "api-token": "jlHV4kzdnd_LhoKfOKiVbcKc4lEaDXBhwHQmbfkF7ld8Z3mbapYsZjBktdOy_UCwohQ",
-          "user-email": "tpsvipulpatna9798@gmail.com"
-        }
-      });
-      const authData = await authResponse.json();
-      const token = authData.auth_token;
-
-      // Then get cities
-      const response = await fetch(
-        `https://www.universal-tutorial.com/api/cities/${stateName}`, {
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Accept": "application/json"
-        }
-      });
-      const cityData = await response.json();
-
-      // Transform data for select options
-      const cityOptions = cityData.map(city => ({
-        value: city.city_name,
-        label: city.city_name
-      }));
-
+      const cityOptions = await fetchCitiesBasedOnState(stateName); // Call the service function
       setCities(cityOptions);
     } catch (error) {
       console.error('Error fetching cities:', error);
@@ -291,8 +316,6 @@ const AddCompany = () => {
     if (!value && field.required) {
       return `${field.label} is required`;
     }
-
-
     return '';
   };
 
@@ -405,7 +428,7 @@ const AddCompany = () => {
                 <input
                   type="text"
                   name={item.name}
-                  className={`input-field ${formErrors[item.name] ? 'error' : ''}`}
+                  className={`input-field-add-company ${formErrors[item.name] ? 'error' : ''}`}
                   value={formData[item.name] || ''}
                   onChange={(e) => handleInputChange(item.name, e.target.value)}
                 />
@@ -425,7 +448,7 @@ const AddCompany = () => {
                     <input
                       type="number"
                       name={item.name}
-                      className={`input-field no-spinners ${formErrors[item.name] ? 'error' : ''}`}
+                      className={`input-field-add-company no-spinners ${formErrors[item.name] ? 'error' : ''}`}
                       value={formData[item.name] || ''}
                       onChange={(e) => handleInputChange(item.name, e.target.value)}
                       maxLength="6"
@@ -435,7 +458,7 @@ const AddCompany = () => {
                   <input
                     type="number"
                     name={item.name}
-                    className={`input-field number-input ${formErrors[item.name] ? 'error' : ''}`}
+                    className={`input-field-add-company number-input ${formErrors[item.name] ? 'error' : ''}`}
                     value={formData[item.name] || ''}
                     onChange={(e) => handleInputChange(item.name, e.target.value)}
                   />
@@ -452,7 +475,7 @@ const AddCompany = () => {
                 </label>
                 <textarea
                   name={item.name}
-                  className={`textarea-field ${formErrors[item.name] ? 'error' : ''}`}
+                  className={`textarea-field-add-company ${formErrors[item.name] ? 'error' : ''}`}
                   value={formData[item.name] || ''}
                   onChange={(e) => handleInputChange(item.name, e.target.value)}
                 ></textarea>
@@ -559,7 +582,7 @@ const AddCompany = () => {
                   <label htmlFor={`file-${index}`} className={`custom-file-upload ${formErrors[item.name] ? 'error' : ''}`}>
                     Choose file
                   </label>
-                  <span className="file-name">
+                  <span className="file-name-add-company">
                     {formData[item.name]?.name || "No file chosen"}
                   </span>
                 </div>

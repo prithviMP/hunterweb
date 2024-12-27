@@ -388,7 +388,7 @@ const Invoice = () => {
                                 </div>
                             </div>
                         </div>
-                        <div style={{ height: "440px", width: "100%" }}>
+                        <div style={{ height: "440px", width: "calc(100% - 60px)" }}>
                             <Chart
                                 options={{
                                     ...chartOptions,

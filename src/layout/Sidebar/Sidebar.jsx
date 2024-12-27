@@ -14,10 +14,10 @@ export default function Sidebar({ setHeaderText }) {
             icon: Icons.codicon_graph,
             icon_white: Icons.codicon_graph_white,
             rightIcon: Icons.codicon_chevron_right,
-            navigateTo: "/sales",
+            navigateTo: "/sales/reports",
             subItems: [
                 { name: "Sales Reports", navigateTo: "/sales/reports" },
-                { name: "Leads", navigateTo: "/leads" },
+                { name: "Leads", navigateTo: "/sales/leads" },
                 { name: "Updated Partners", navigateTo: "/sales/updated-partners" },
                 { name: "Category Search", navigateTo: "/sales/category-search" },
                 { name: "Sales Order", navigateTo: "/sales/order" },
@@ -40,16 +40,17 @@ export default function Sidebar({ setHeaderText }) {
         },
 
         {
-            name: "Contact Manager", icon: Icons.mdi_target, icon_white: Icons.mdi_target_white, navigateTo: "/targets",
+            name: "Contact Manager", icon: Icons.mdi_target, icon_white: Icons.mdi_target_white, navigateTo: "/contact-manager/company-management",
             subItems: [
-                { name: "Company", navigateTo: "/company-management" },
-                { name: "Contact", navigateTo: "/call-manager/leads" },
-                { name: "Temp Contacts", navigateTo: "/call-manager/updated-partners" },
-                { name: "Transfer Contacts", navigateTo: "/call-manager/category-search" },
+                { name: "Company", navigateTo: "/contact-manager/company-management" },
+                { name: "Contact", navigateTo: "/contact-manager/contact" },
+                { name: "Temp Contacts", navigateTo: "/contact-manager/temp-contacts" },
+                { name: "Transfer Contacts", navigateTo: "/contact-manager/transfer-contacts" },
             ]
         },
         { name: "Commit", icon: Icons.stash_invoice, icon_white: Icons.stash_invoice_white, navigateTo: "/invoice-management" },
         { name: "Plans", icon: Icons.priceList, icon_white: Icons.priceListWhite, navigateTo: "/pricelist" },
+        { name: "Performance Metrices", icon: Icons.priceList, icon_white: Icons.priceListWhite, navigateTo: "/performance-metrices" },
 
     ];
 

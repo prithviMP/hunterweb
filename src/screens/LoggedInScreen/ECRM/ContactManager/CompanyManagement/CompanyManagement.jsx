@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./CompanyManagement.css"; // Import the CSS file
 import CompanyManagementInfoOnCard from "./CompanyManagementInfoOnCard/CompanyManagementInfoOnCard";
-import { Icons } from "../../../../Icons/Icons";
+import { Icons } from "../../../../../Icons/Icons";
 import CompanyManagementTable from "./CompanyManagementTable/CompanyManagementTable";
 import AddCompany from "./AddCompany/AddCompany";
-import StorageService from "../../../../utils/userToken";
-import { fetchCompanyManagements } from "../../../../services/api/companyManagement/repository";
+import StorageService from "../../../../../utils/userToken";
+import { fetchCompanyManagements } from "../../../../../services/api/companyManagement/repository";
 
 
 const CompanyManagement = () => {
