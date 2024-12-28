@@ -80,7 +80,7 @@ import tutorials from "../assets/home-page/tutorials.png";
 import user_controll from "../assets/home-page/user_controll.png";
 
 //pricelist icons
-import product_image from "../assets/pricelist/product_image.png";
+import product_image from "../assets/priceList/product_image.png";
 
 export const Icons = {
   hunter_logo,
