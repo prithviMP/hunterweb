@@ -111,6 +111,18 @@ body {
   justify-content: space-between;
 }
 
+.commonTextCss {
+  font-family: var(--montserrat);
+  font-weight: var(--extra-semi-bold);
+  color: var(--black-color);
+}
+
+.commonTextCssWithManrope {
+  font-family: var(--manrope);
+  font-weight: 400;
+  color: var(--black-color);
+}
+
 .commonButtonCss {
   background-color: var(--primary-color);
   color: #FFF;
@@ -121,6 +133,26 @@ body {
   font-weight: var(--extra-semi-bold);
   cursor: pointer;
   border-radius: 5px;
+}
+
+.commonButtonDownload {
+  background-color: var(--white-color);
+  color: var(--primary-color);
+  font-family: var(--montserrat);
+  padding: 10px 10px;
+  font-size: 14px;
+  font-weight: var(--extra-semi-bold);
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.commonInputCss {
+  border: 1px solid var(--card-border);
+  border-radius: 5px;
+  padding: 10px 10px;
+  font-size: 14px;
+  font-weight: var(--extra-semi-bold);
+  cursor: pointer;
 }
 
 .pagination-container {

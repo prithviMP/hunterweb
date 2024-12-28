@@ -12,6 +12,8 @@ import Invoice from "../screens/LoggedInScreen/ECRM/Sales/Invoice/Invoice";
 import CompanyManagement from "../screens/LoggedInScreen/ECRM/ContactManager/CompanyManagement/CompanyManagement";
 import Contact from "../screens/LoggedInScreen/ECRM/ContactManager/Contact/Contact";
 import AddContact from "../screens/LoggedInScreen/ECRM/ContactManager/Contact/AddContact/AddContact";
+import TransferContacts from "../screens/LoggedInScreen/ECRM/ContactManager/TransferContacts/TransferContacts";
+import TempContacts from "../screens/LoggedInScreen/ECRM/ContactManager/TempContacts/TempContacts";
 // import PerformanceMetrices from "../screens/LoggedInScreen/ECRM/PerformanceMetrices";
 function AppNavigator({ searchQuery, currentModule }) {
     const renderModule = () => {
@@ -39,7 +41,7 @@ function AppNavigator({ searchQuery, currentModule }) {
                         <Route path="dashboard" element={<Dashboard searchQuery={searchQuery} />} />
                         <Route path="call-manager" element={<CallManager searchQuery={searchQuery} />} />
 
-                     
+
 
                         {/* Sales */}
                         <Route path="/sales/leads" element={<Leads searchQuery={searchQuery} />} />
@@ -57,8 +59,8 @@ function AppNavigator({ searchQuery, currentModule }) {
                         />
                         <Route path="/contact-manager/contact" element={<Contact searchQuery={searchQuery} />} />
                         <Route path="/contact-manager/add-contact" element={<AddContact />} />
-                        {/* <Route path="/contact-manager/temp-contacts" element={<TempContacts searchQuery={searchQuery} />} />
-                        <Route path="/contact-manager/transfer-contacts" element={<TransferContacts searchQuery={searchQuery} />} /> */}
+                        <Route path="/contact-manager/temp-contacts" element={<TempContacts searchQuery={searchQuery} />} />
+                        <Route path="/contact-manager/transfer-contacts" element={<TransferContacts searchQuery={searchQuery} />} />
                         {/* <Route path="/performance-metrices" element={<PerformanceMetrices searchQuery={searchQuery} />} /> */}
                     </Routes>
                 );
