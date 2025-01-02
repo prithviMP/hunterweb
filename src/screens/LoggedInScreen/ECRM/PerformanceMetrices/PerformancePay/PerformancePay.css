@@ -21,7 +21,21 @@
     font-size: 14px !important;
 }
 
-.performance-pay-table th:last-child {
+.performance-pay-date-picker {
+    padding: 11px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-left: 10px;
+    position: relative;
+    top: -1px;
+    width: 100px;
+}
+
+
+.performance-pay-table th:nth-child(6),
+.performance-pay-table th:nth-child(7),
+.performance-pay-table th:nth-child(8),
+.performance-pay-table th:nth-child(9) {
     border: 1px solid var(--table-border-color);
     line-height: 1.8;
     padding: 10px 0px 0px 0px;
@@ -48,4 +62,56 @@
 
 .performance-pay-table tr:hover {
     background-color: var(--table-hover-color);
+}
+
+
+.performance-pay-popup {
+    background: var(--white-color);
+    padding: 15px 20px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.performance-pay-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0px;
+    margin-top: -30px;
+    font-family: var(--montserrat);
+    font-weight: 400;
+}
+
+.performance-pay-close-button {
+    background: transparent;
+    border: none;
+    font-size: 40px;
+    cursor: pointer;
+    color: var(--black-color);
+}
+
+.performance-pay-select {
+    width: 400px !important;
+
+}
+
+.performance-pay-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: -10px;
+}
+
+.performance-pay-form label {
+    margin-bottom: -10px;
+}
+
+.performance-pay-input {
+    width: calc(100% - 20px);
+
+}
+
+.performance-pay-submit-button {
+    width: 160px
 }

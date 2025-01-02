@@ -17,15 +17,18 @@ export default function Sidebar({ setHeaderText }) {
             navigateTo: "/sales/reports",
             subItems: [
                 { name: "Sales Reports", navigateTo: "/sales/reports" },
-                { name: "Leads", navigateTo: "/sales/leads" },
-                { name: "Updated Partners", navigateTo: "/sales/updated-partners" },
+                { name: "Lead", navigateTo: "/sales/leads" },
+                { name: "Quote", navigateTo: "/sales/quote" },
+                { name: "Unbilled Partners", navigateTo: "/sales/unbilled-partners" },
                 { name: "Category Search", navigateTo: "/sales/category-search" },
                 { name: "Sales Order", navigateTo: "/sales/order" },
+
                 { name: "Invoice", navigateTo: "/sales/invoice" },
+                { name: "Unpaid Invoice", navigateTo: "/sales/unpaid-invoice" },
                 { name: "Invoice Line Item", navigateTo: "/sales/invoice-line-item" },
                 { name: "Receipt", navigateTo: "/sales/receipt" },
                 { name: "Credit Note", navigateTo: "/sales/credit-note" },
-                { name: "CPO", navigateTo: "/sales/cpo" },
+                { name: "ORC", navigateTo: "/sales/orc" },
                 { name: "Pricelist", navigateTo: "/sales/pricelist" },
                 { name: "Sales Reversal", navigateTo: "/sales/reversal" },
                 { name: "Stock Request", navigateTo: "/sales/stock-request" },
@@ -54,7 +57,13 @@ export default function Sidebar({ setHeaderText }) {
             ]
         },
         { name: "Commit", icon: Icons.stash_invoice, icon_white: Icons.stash_invoice_white, navigateTo: "/commit" },
-        { name: "Plans", icon: Icons.priceList, icon_white: Icons.priceListWhite, navigateTo: "/pricelist" },
+        {
+            name: "Plans", icon: Icons.priceList, icon_white: Icons.priceListWhite, navigateTo: "/pricelist",
+            subItems: [
+                { name: "My Plans", navigateTo: "/plans/my-plans" },
+                { name: "Contact Plans", navigateTo: "/plans/contact-plans" },
+            ]
+        },
 
 
         {
@@ -97,6 +106,8 @@ export default function Sidebar({ setHeaderText }) {
                                     setOpenSubmenu(openSubmenu === "Contact Manager" ? null : "Contact Manager");
                                 } else if (item.name === "Performance Metrices") {
                                     setOpenSubmenu(openSubmenu === "Performance Metrices" ? null : "Performance Metrices");
+                                } else if (item.name === "Plans") {
+                                    setOpenSubmenu(openSubmenu === "Plans" ? null : "Plans");
                                 } else {
                                     setOpenSubmenu(null);
                                 }
