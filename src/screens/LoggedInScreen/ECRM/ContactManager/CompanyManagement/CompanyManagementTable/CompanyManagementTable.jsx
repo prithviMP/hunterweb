@@ -70,23 +70,31 @@ const CompanyManagementTable = ({ companies, onCheckChange }) => {
 
     return (
         <div className="company-management-container">
-            <div className="company-management-table company-management-table-css">
-                <table className="box-shadow border-radius">
+            <div className="company-management-table company-management-table-css" style={{ width: '100%' }}>
+
+                <table className="box-shadow border-radius" style={{ width: '100%', overflowX: 'auto' }}>
                     <thead>
                         <tr>
-                            <th></th>
-                            <th>
+                            <th ></th>
+                            <th >
                                 <input
                                     type="checkbox"
                                     checked={allChecked}
                                     onChange={handleSelectAll}
                                 />
                             </th>
-                            <th>Created by</th>
-                            <th>Company Name</th>
-                            <th>Contacts</th>
-                            <th>Area</th>
-                            <th>Sales ID</th>
+                            <th >Created by</th>
+                            <th >Company Name</th>
+                            <th >Contacts</th>
+                            <th >Area</th>
+                            <th >Sales ID</th>
+                            {/* <th >Total Calls</th>
+                            <th >GSTIN Category</th>
+                            <th >GST Number</th>
+                            <th >Web-Access</th>
+                            <th >Invoice</th>
+                            <th >Last Updated By</th>
+                            <th >Loyality Program</th> */}
                         </tr>
                     </thead>
                     <tbody>
@@ -203,10 +211,44 @@ const CompanyManagementTable = ({ companies, onCheckChange }) => {
                                 <td className="font-weight_600 black-color">
                                     {company.SalesID}
                                 </td>
+                                {/* <td>0</td>
+                                <td>Unregistered business</td>
+                                <td>33AZZPM2425K1ZW</td>
+                                <td >
+                                    <p style={{ width: 60, backgroundColor: "#D0FF8F", borderRadius: 10, padding: 5, paddingLeft: 10, paddingRight: 10, color: "var(--green-color)" }}> • Active</p>
+                                    <p>CLNPropertiesPvtLtd@gmail.com</p>
+                                    <p><span className="flex" style={{ justifyContent: 'start', alignItems: "center", gap: 5 }}><i className="fa-solid fa-check" style={{ color: "var(--white-color)", backgroundColor: "var(--green-color)", borderRadius: '100%', width: 15, height: 15, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10 }}></i> Verified</span></p>
+
+                                    <div className="flex" style={{ gap: 10 }}>
+                                        <button className="border-radius" style={{ backgroundColor: "#00BFA5", color: "var(--white-color)", padding: 5, paddingLeft: 10, paddingRight: 10 }}>
+                                            Mark as RD
+                                        </button>
+                                        <button className="border-radius" style={{ backgroundColor: "#FF8800", color: "var(--white-color)", padding: 5, paddingLeft: 10, paddingRight: 10 }}>
+                                            Mark as VaP
+                                        </button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p>₹9,27,208</p>
+                                    <p><span style={{ color: "var(--red-color)" }}>Due: ₹9,27,208</span></p>
+                                </td>
+
+                                <td>Shreepriya Gupta
+                                    <span>12-Jul-2024 15:08:40</span>
+                                </td>
+                                <td>
+                                    <p><span>Program:</span> NOt Joined</p>
+                                    <p><span>Tier:</span> No Tier Assigned</p>
+                                    <p><span>Coin:</span> 0</p>
+                                </td> */}
+
                             </tr>
                         ))}
                     </tbody>
                 </table>
+
+
+
             </div>
 
             {/* Pagination Section */}

@@ -1,13 +1,14 @@
-.tempContacts-page-container{
+.tempContacts-page-container {
     padding-bottom: 20px;
 }
 
-.tempContacts-page-actions-buttons{
+.tempContacts-page-actions-buttons {
     width: 400px !important;
     height: 42px !important;
     gap: 10px !important;
     margin-right: 20px;
 }
+
 .tempContacts-page-filters {
     display: flex;
     gap: 20px;
@@ -33,7 +34,7 @@
     border: 1px solid var(--card-border);
     border-radius: 8px;
     padding: 0px 16px 16px 16px;
-    width: 100%;
+    width: 310px;
     background-color: var(--white-color);
 }
 
@@ -54,7 +55,8 @@
     margin: 15px 0;
     gap: 5px;
 }
-.tempContacts-address-container{
+
+.tempContacts-address-container {
     border: 1px solid var(--card-border);
     border-radius: 3px;
     padding: 10px;
@@ -63,7 +65,7 @@
     font-size: 14px;
     font-weight: 400;
     color: var(--side-nav-menu-color);
-    width:  calc(100% - 20px);
+    width: calc(100% - 20px);
 }
 
 
@@ -85,26 +87,42 @@
     margin-top: 10px;
 }
 
-/* Responsive Styles */
-@media (min-width: 768px) { /* For tablets and larger screens */
+
+/* @media (min-width: 768px) {
+
+
     .tempContacts-page-contact-card {
-        width: 48%; /* Two cards in a row */
+        width: 48%;
+       
+    }
+} */
+
+
+
+/* @media (min-width: 1024px) {
+
+    
+    .tempContacts-page-contact-card {
+        width: 28.5%;
+       
     }
 }
 
 
-
-@media (min-width: 1024px) { /* For laptops and larger screens */
+@media screen and (max-width: 1400px) and (min-width: 1600px) {
     .tempContacts-page-contact-card {
-        width: 28.5%; /* Three cards in a row */
+        width: 8.8%;
+      
     }
 }
 
-@media (min-width: 1440px) { /* For laptops and larger screens */
+@media screen and (max-width: 1600px) and (min-width: 2000px) {
+
     .tempContacts-page-contact-card {
-        width: 21.8%; /* Three cards in a row */
+        width: 21.8%;
+       
     }
-}
+} */
 
 /* Create Temporary Contact Popup */
 .createTemporaryContactPopup {
@@ -151,11 +169,10 @@
 
     border: 1px solid var(--card-border);
     border-radius: 4px;
-    width:  calc(100% - 20px);
+    width: calc(100% - 20px);
     margin-top: 5px;
 }
-.createTempContactPopup-error{
+
+.createTempContactPopup-error {
     margin-top: -10px;
 }
-
-

@@ -5,6 +5,7 @@ import { FETCH_USERS, LOGIN_USER } from "./endPoint";
 export const loginUser = async (data) => {
   try {
     const response = await apiClient.post(LOGIN_USER, data);
+    sessionStorage.setItem("userName", response?.data?.user?.username);
     return response;
   } catch (error) {
     console.error("Error while login:", error);

@@ -119,7 +119,7 @@ const notificationData = {
 
 const Home = ({ handleAppClick }) => {
     const loggedInUserState = "Kashmir";
-    const userName = "Abhishek";
+    const userName = sessionStorage.getItem("userName");
     const pendingTasks = 5;
     const time = new Date().toLocaleTimeString();
     const [searchTerm, setSearchTerm] = useState("");
@@ -151,6 +151,7 @@ const Home = ({ handleAppClick }) => {
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
     };
+
     const handleUserProfileItemClick = (itemType) => {
         if (itemType === "Logout") {
             sessionStorage.clear();
@@ -162,6 +163,7 @@ const Home = ({ handleAppClick }) => {
             window.location.reload();
         }
     };
+
 
     return (
         <div className="home-container">

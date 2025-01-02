@@ -27,7 +27,7 @@
     padding: 8px;
     border: 1px solid var(--primary-color);
     border-radius: 5px;
-  
+
     height: 40px;
     color: var(--primary-color);
     font-family: var(--manrope);
@@ -35,4 +35,3 @@
     font-weight: var(--extra-semi-bold);
     margin-right: 10px;
 }
-

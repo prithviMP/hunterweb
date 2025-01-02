@@ -12,8 +12,10 @@ const CompanyManagement = () => {
   const [isContentHidden, setIsContentHidden] = useState(false);
   const [hasCheckedItems, setHasCheckedItems] = useState(false);
   const [companies, setCompanies] = useState([]);
+
   const handleAddCompanyClick = () => {
     setIsContentHidden(true); // Hide all content
+    sessionStorage.setItem("headerName", "Business Registration");
   };
   // const companies = [
   //   {
@@ -88,9 +90,6 @@ const CompanyManagement = () => {
   //   }
   // ]
 
-  useEffect(() => {
-    StorageService.setToken("4f7cd770259628666f68c13851e12cc109869aebf79519262dabee73cb2c350c30897f1276e7803efe60825ad83951842a0904367bd43a6522086fe6ab6dec6faefb3bc7efbd7be57f4ed08a042acebbb07898466e45d953eed7e77780173e25efa0c6891f9632ce4d018612f2a8b36194750480e447b7defff9f04fc6aa75cf")
-  }, []);
 
   useEffect(() => {
     fetchCompanyManagements().then((data) => {
@@ -98,6 +97,7 @@ const CompanyManagement = () => {
       setCompanies(data.data);
     });
   }, []);
+
   return (
     <div className="company-management-main-section">
       {!isContentHidden && (
@@ -128,27 +128,37 @@ const CompanyManagement = () => {
               </select>
             </div>
           </div>
-          <div style={{ display: "flex", gap: 10 }}>
-            <div className="filter-section-main-div">
-              <button className="company-management-button commonButtonCss" style={{ width: 130 }}>
-                <span style={{ paddingRight: 5 }}>
-                  <img src={Icons.filter_icon} alt="filter icon" />
-                </span> Add Filter
-              </button>
+          <div style={{ display: "flex", gap: 10, justifyContent: "space-between", marginRight: 10, alignItems: "center" }}>
+            <div className="flex" style={{ gap: 10 }}>
+              <div className="filter-section-main-div">
+
+                <button className="company-management-button commonButtonCss" style={{ width: 130 }}>
+                  <span style={{ paddingRight: 5 }}>
+                    <img src={Icons.filter_icon} alt="filter icon" />
+                  </span> Add Filter
+                </button>
+
+
+              </div>
+
+              {hasCheckedItems && (
+                <div className="filter-section-main-div">
+                  <button className="company-management-button commonButtonCss" style={{ width: 100, background: "var(--red-color)" }}>
+                    <span style={{ paddingRight: 5 }}>
+                      <img src={Icons.delete_icon} alt="filter icon" />
+                    </span> Delete
+                  </button>
+                </div>
+              )}
             </div>
 
-            {hasCheckedItems && (
-              <div className="filter-section-main-div">
-                <button className="company-management-button commonButtonCss" style={{ width: 100, background: "var(--red-color)" }}>
-                  <span style={{ paddingRight: 5 }}>
-                    <img src={Icons.delete_icon} alt="filter icon" />
-                  </span> Delete
-                </button>
-              </div>
-            )}
+
+            <div className="company-management-table-toggler cursor">
+              <img src={Icons.table_toggler} alt="table toggler icon" />
+            </div>
           </div>
 
-          <div className="company-management-tabler-data">
+          <div className="company-management-tabler-data" style={{ maxWidth: '100%' }}>
             <CompanyManagementTable
               companies={companies}
               onCheckChange={setHasCheckedItems}

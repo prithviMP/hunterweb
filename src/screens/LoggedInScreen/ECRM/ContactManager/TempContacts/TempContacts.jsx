@@ -423,7 +423,7 @@ const TempContacts = () => {
 
                     <select onChange={(e) => handleUserChange(e.target.value)}>
                         <option>Filter by User</option>
-                        {users.map((user) => (
+                        {users?.map((user) => (
                             <option key={user.id} value={user.username}>{user.username}</option>
                         ))}
                     </select>

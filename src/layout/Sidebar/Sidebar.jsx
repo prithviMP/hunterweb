@@ -84,6 +84,8 @@ export default function Sidebar({ setHeaderText }) {
                                 setHeaderText(item.name);
                                 if (item.name === "Commit") {
                                     sessionStorage.setItem('headerName', "My Commit");
+                                } else if (item.name === "Contact Manager") {
+                                    sessionStorage.setItem('headerName', "Company Management");
                                 } else {
                                     sessionStorage.setItem('headerName', item.name);
                                 }
@@ -124,7 +126,11 @@ export default function Sidebar({ setHeaderText }) {
                                         className={({ isActive }) => `submenu-item ${isActive ? "selected" : ""}`}
                                         onClick={() => {
                                             setHeaderText(subItem.name);
-                                            sessionStorage.setItem('headerName', subItem.name);
+                                            if (subItem.name === "Company") {
+                                                sessionStorage.setItem('headerName', "Company Management");
+                                            } else {
+                                                sessionStorage.setItem('headerName', subItem.name);
+                                            }
                                         }}
                                     >
                                         - {subItem.name}
