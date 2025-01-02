@@ -1,0 +1,51 @@
+.performance-pay-container {
+    width: calc(100% - 10px);
+
+}
+
+.performance-pay-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 1px solid var(--table-border-color);
+}
+
+.performance-pay-table th,
+.performance-pay-table td {
+
+    border-bottom: 1px solid var(--table-border-color);
+    text-align: left;
+}
+
+.performance-pay-table th {
+    font-size: 14px !important;
+}
+
+.performance-pay-table th:last-child {
+    border: 1px solid var(--table-border-color);
+    line-height: 1.8;
+    padding: 10px 0px 0px 0px;
+}
+
+.performance-pay-table-header span {
+    border-right: 1px solid var(--table-border-color);
+    font-size: 12px !important;
+    padding: 8px 0px 5px 0px;
+}
+
+.performance-pay-table-header span:last-child {
+    border-right: none;
+}
+
+
+.performance-pay-green {
+    color: var(--green-color);
+}
+
+.performance-pay-red {
+    color: var(--red-color);
+}
+
+.performance-pay-table tr:hover {
+    background-color: var(--table-hover-color);
+}

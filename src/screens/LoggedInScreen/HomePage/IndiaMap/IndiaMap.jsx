@@ -86,6 +86,7 @@ const IndiaMap = ({ onLoad }) => {
                                             fill: "#28A745",
                                             outline: "none",
                                         },
+                                        cursor: "pointer",
                                     }}
                                 />
                             );

@@ -7,39 +7,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
+    margin-right: 10px;
 }
 
-.call-manager-tabs {
-    display: flex;
-    gap: 10px;
-    background-color: var(--white-color);
-    border-radius: 5px;
-    padding: 5px;
-    margin-bottom: 10px;
-}
-
-.call-manager-tab {
-    padding: 8px 16px;
-    border: none;
-    background: none;
-    cursor: pointer;
-    font-family: var(--montserrat);
-    font-weight: var(--extra-semi-bold);
-    font-size: 14px;
-    color: var(--black-color);
-    width: 150px;
-}
-
-.call-manager-tab.active {
-    color: var(--primary-color);
-    background-color: #E4F1FF;
-}
 
 .call-manager-count-section {
     display: flex;
     gap: 10px;
     align-items: center;
+ 
 }
 
 .call-manager-count-section span {
@@ -250,15 +227,15 @@
     border-radius: 4px;
     border: none;
     cursor: pointer;
-    color: #4A4A4A;
+    color: var(--primary-color);
     font-family: var(--montserrat);
-    border: 1px solid #4A4A4A;
-    font-weight: 600;
+    font-weight: var(--extra-semi-bold);
+    background-color: var(--white-color);
 }
 
 
 .call-manager-popup-label {
     width: 120px !important;
     text-align: right;
-    
+
 }

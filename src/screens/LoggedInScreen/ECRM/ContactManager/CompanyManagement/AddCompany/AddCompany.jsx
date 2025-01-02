@@ -740,18 +740,24 @@ const AddCompany = () => {
       ))}
 
       <div className="button-section">
-        <button
-          className="cancel-button"
-          onClick={() => {/* Add your cancel logic here */ }}
-        >
-          Cancel
-        </button>
-        <button
-          className="save-button"
-          onClick={addCompany} // Trigger addCompany function on click
-        >
-          Create
-        </button>
+        <div>
+          <button
+            className="cancel-button"
+            onClick={() => {/* Add your cancel logic here */ }}
+          >
+            Cancel
+          </button>
+        </div>
+        <div>
+          <button
+            className="save-button"
+            onClick={addCompany} // Trigger addCompany function on click
+          >
+            Create
+          </button>
+        </div>
+
+
       </div>
     </div>
   );

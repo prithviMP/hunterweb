@@ -36,7 +36,12 @@ export default function Sidebar({ setHeaderText }) {
             name: "Call Manager",
             icon: Icons.ion_call_outline,
             icon_white: Icons.ion_call_outline_white,
-            navigateTo: "/call-manager",
+            navigateTo: "/call-manager/all-call-logs",
+            subItems: [
+                { name: "All Call Logs", navigateTo: "/call-manager/all-call-logs" },
+                { name: "Pending Logs", navigateTo: "/call-manager/pending-logs" },
+
+            ]
         },
 
         {
@@ -48,10 +53,18 @@ export default function Sidebar({ setHeaderText }) {
                 { name: "Transfer Contacts", navigateTo: "/contact-manager/transfer-contacts" },
             ]
         },
-        { name: "Commit", icon: Icons.stash_invoice, icon_white: Icons.stash_invoice_white, navigateTo: "/invoice-management" },
+        { name: "Commit", icon: Icons.stash_invoice, icon_white: Icons.stash_invoice_white, navigateTo: "/commit" },
         { name: "Plans", icon: Icons.priceList, icon_white: Icons.priceListWhite, navigateTo: "/pricelist" },
-        { name: "Performance Metrices", icon: Icons.priceList, icon_white: Icons.priceListWhite, navigateTo: "/performance-metrices" },
 
+
+        {
+            name: "Performance Metrices", icon: Icons.mdi_target, icon_white: Icons.mdi_target_white, navigateTo: "/performance-metrices/sales-performance",
+            subItems: [
+                { name: "Sales Performance", navigateTo: "/performance-metrices/sales-performance" },
+                { name: "Performance Pay", navigateTo: "/performance-metrices/performance-pay" },
+                { name: "Statewise Performance", navigateTo: "/performance-metrices/statewise-performance" },
+            ]
+        },
     ];
 
     useEffect(() => {
@@ -69,13 +82,19 @@ export default function Sidebar({ setHeaderText }) {
                             className={({ isActive }) => `menu-item ${isActive ? "selected" : ""}`}
                             onClick={() => {
                                 setHeaderText(item.name);
-                                sessionStorage.setItem('headerName', item.name);
+                                if (item.name === "Commit") {
+                                    sessionStorage.setItem('headerName', "My Commit");
+                                } else {
+                                    sessionStorage.setItem('headerName', item.name);
+                                }
                                 if (item.name === "Sales") {
                                     setOpenSubmenu(openSubmenu === "Sales" ? null : "Sales");
                                 } else if (item.name === "Call Manager") {
                                     setOpenSubmenu(openSubmenu === "Call Manager" ? null : "Call Manager");
                                 } else if (item.name === "Contact Manager") {
                                     setOpenSubmenu(openSubmenu === "Contact Manager" ? null : "Contact Manager");
+                                } else if (item.name === "Performance Metrices") {
+                                    setOpenSubmenu(openSubmenu === "Performance Metrices" ? null : "Performance Metrices");
                                 } else {
                                     setOpenSubmenu(null);
                                 }
